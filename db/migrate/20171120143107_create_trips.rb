@@ -3,7 +3,7 @@ class CreateTrips < ActiveRecord::Migration[5.1]
     create_table :trips do |t|
       t.string :title
       t.integer :distance
-      t.integer :elelevation
+      t.integer :elevation
 
       t.timestamps
     end
