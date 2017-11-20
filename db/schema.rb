@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120143907) do
+ActiveRecord::Schema.define(version: 20171120151901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accomodations", force: :cascade do |t|
+  create_table "accommodations", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.integer "price"
-    t.integer "rating"
+    t.float "rating"
     t.bigint "stage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stage_id"], name: "index_accomodations_on_stage_id"
+    t.index ["stage_id"], name: "index_accommodations_on_stage_id"
   end
 
   create_table "stages", force: :cascade do |t|
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20171120143907) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accommodations", "stages"
   add_foreign_key "accomodations", "stages"
   add_foreign_key "stages", "trips"
   add_foreign_key "trip_members", "trips"
