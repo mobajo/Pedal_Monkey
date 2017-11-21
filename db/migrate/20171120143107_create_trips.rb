@@ -4,8 +4,8 @@ class CreateTrips < ActiveRecord::Migration[5.1]
       t.string :title
       t.integer :distance
       t.integer :elevation
-
       t.timestamps
     end
   end
 end
+
