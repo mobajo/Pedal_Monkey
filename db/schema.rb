@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20171120151901) do
   create_table "trips", force: :cascade do |t|
     t.string "title"
     t.integer "distance"
-    t.integer "elevation"
+    t.integer "elelevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
