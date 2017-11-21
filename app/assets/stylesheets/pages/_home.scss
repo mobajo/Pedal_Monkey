@@ -1,1 +1,84 @@
 // Specific CSS for your home-page
+body {
+  background-image: url("http://res.cloudinary.com/mobajo/image/upload/v1511274068/light_noise_diagonal_guib0l.png");
+}
+
+hr {
+  border-top: 1px solid $brand-danger;
+}
+
+.color-square {
+  height: 150px;
+  width: 100%;
+}
+
+.color-yellow {
+  background-color: $brand-info;
+}
+
+
+.color-gray {
+  background-color: $gray;
+}
+
+.color-red {
+  background-color: $brand-danger;
+}
+
+.color-green {
+  background-color: $brand-success;
+}
+
+body {
+  color: black;
+}
+
+.main-content {
+  min-height: 80vh;
+}
+
+.content-box {
+  background-color: white;
+  box-shadow: 1px 1px 1px $gray-base;
+  padding: 30px 15px 10px 20px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.content-box-gray {
+  background-color: $gray-base;
+  box-shadow: 1px 1px 1px white;
+  padding: 30px 15px 10px 20px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.content-headline-green {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  padding: 1px 10px;
+  margin-top: 10px;
+  background-color: $brand-success;
+  color: white;
+}
+
+.content-headline-red {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  padding: 1px 10px;
+  margin-top: 10px;
+  background-color: $brand-danger;
+  color: white;
+}
+
+.content-headline-green h3 {
+  margin: 0px;
+  padding: 0px;
+}
+
+.content-headline-red h3 {
+  margin: 0px;
+  padding: 0px;
+}
