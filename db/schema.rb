@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20171120171208) do
   create_table "trips", force: :cascade do |t|
     t.string "title"
     t.integer "distance"
-    t.integer "elevation"
+    t.integer "elelevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "start_date"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20171120171208) do
   end
 
   add_foreign_key "accommodations", "stages"
+  add_foreign_key "accomodations", "stages"
   add_foreign_key "stages", "trips"
   add_foreign_key "trip_members", "trips"
   add_foreign_key "trip_members", "users"

@@ -83,6 +83,8 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
+    google_directions (0.1.6.2)
+      nokogiri (>= 1.4.1)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -212,6 +214,7 @@ DEPENDENCIES
   font-awesome-sass
   geocoder
   gmaps4rails
+  google_directions
   jbuilder (~> 2.0)
   jquery-rails
   listen (~> 3.0.5)
