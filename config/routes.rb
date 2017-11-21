@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   resources :trips do
-  resources :stages    
+  resources :stages
   end
 
-  
+
 
   get "dashboard", to: "trips#dashboard"
 

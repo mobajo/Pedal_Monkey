@@ -1,4 +1,4 @@
-class AccommodationsController < ApplicationController
+class PitstopsController < ApplicationController
   def show
   end
 
@@ -17,3 +17,4 @@ class AccommodationsController < ApplicationController
   def destroy
   end
 end
+
