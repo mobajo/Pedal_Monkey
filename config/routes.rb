@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
 
   get "dashboard", to: "trips#dashboard"
+  get "designguide", to: "pages#designguide"
 
   devise_for :users
   root to: 'pages#home'
