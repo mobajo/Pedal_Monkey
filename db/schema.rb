@@ -8,9 +8,10 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system
 
 ActiveRecord::Schema.define(version: 20171122132948) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,15 +32,10 @@ ActiveRecord::Schema.define(version: 20171122132948) do
   end
 
   create_table "stages", force: :cascade do |t|
-    t.string "startpoint_address"
-    t.float "startpoint_latitude"
-    t.float "startpoint_longitude"
-    t.string "endpoint_address"
-    t.float "endpoint_latitude"
-    t.float "endpoint_longitude"
     t.integer "stage_no"
     t.integer "distance"
     t.integer "elevation"
+    t.date "stage_date"
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,8 +58,6 @@ ActiveRecord::Schema.define(version: 20171122132948) do
     t.integer "elevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date"
-    t.date "end_date"
   end
 
   create_table "users", force: :cascade do |t|
