@@ -10,23 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121150121) do
-
+ActiveRecord::Schema.define(version: 20171122132948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accommodations", force: :cascade do |t|
+  create_table "pitstops", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.integer "price"
     t.float "rating"
-    t.bigint "stage_id"
+    t.bigint "end_stage_id"
+    t.bigint "start_stage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stage_id"], name: "index_accommodations_on_stage_id"
+    t.index ["end_stage_id"], name: "index_pitstops_on_end_stage_id"
+    t.index ["start_stage_id"], name: "index_pitstops_on_start_stage_id"
   end
 
   create_table "stages", force: :cascade do |t|
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20171121150121) do
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "stage_date"
     t.index ["trip_id"], name: "index_stages_on_trip_id"
   end
 
@@ -77,17 +79,14 @@ ActiveRecord::Schema.define(version: 20171121150121) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-
     t.string "username"
     t.string "first_name"
     t.string "last_name"
     t.string "description"
-
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accommodations", "stages"
   add_foreign_key "stages", "trips"
   add_foreign_key "trip_members", "trips"
   add_foreign_key "trip_members", "users"
