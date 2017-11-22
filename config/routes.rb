@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   resources :stages
   end
 
-
-
   get "dashboard", to: "trips#dashboard"
   get "designguide", to: "pages#designguide"
 
