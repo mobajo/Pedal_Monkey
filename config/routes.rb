@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+mount Attachinary::Engine => "/attachinary"
+
 
   resources :trips do
   resources :stages
   end
-
-
 
   get "dashboard", to: "trips#dashboard"
   get "designguide", to: "pages#designguide"

@@ -1,3 +1,6 @@
+
+
+
 <div id="floating-panel">
   <form action="" method="post">
     <label for="start">Where should your trip start?</label>
@@ -29,11 +32,13 @@
     var destination = new google.maps.LatLng(55.663895, 12.542540);
 
     var waypts = [];
-    var stop = document.getElementById('via').value
-    waypts.push({
-        location: stop,
-        stopover: true,
-    });
+    <% @trip.stages.each do |stage|  %>
+      var stop = '<%= raw stage.end_point.address %>'
+      waypts.push({
+          location: stop,
+          stopover: true,
+      });
+    <% end %>
 
     
     var request = {

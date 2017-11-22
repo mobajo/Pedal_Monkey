@@ -1,15 +1,10 @@
 class TripsController < ApplicationController
   
   def index
+    @trip = Trip.first
   end
 
   def show
-    @trip = Trip.where.not(latitude: nil, longitude: nil)
-
-    @hash = Gmaps4rails.build_markers(@trip) do |flat, marker|
-      marker.lat flat.latitude
-      marker.lng flat.longitude
-    end
   end
 
   def new
