@@ -8,10 +8,9 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system
+# It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20171122132948) do
+ActiveRecord::Schema.define(version: 20171121150121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +38,6 @@ ActiveRecord::Schema.define(version: 20171122132948) do
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "stage_date"
     t.index ["trip_id"], name: "index_stages_on_trip_id"
   end
 
