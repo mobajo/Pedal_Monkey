@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20171121150121) do
 
 
@@ -42,6 +43,8 @@ ActiveRecord::Schema.define(version: 20171121150121) do
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["trip_id"], name: "index_stages_on_trip_id"
   end
 
@@ -77,6 +80,7 @@ ActiveRecord::Schema.define(version: 20171121150121) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
 
     t.string "username"
     t.string "first_name"
