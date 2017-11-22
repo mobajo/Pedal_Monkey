@@ -10,8 +10,8 @@
   <div id="directions" style='width: 800px; height: 400px;'></div>
 </div>
 
-    <%= start_address = @trip.stages.first.start_point.address %>
-    <%= destination_address = @trip.stages.last.end_point.address %>
+    <% start_address = @trip.stages.first.start_point.address %>
+    <% destination_address = @trip.stages.last.end_point.address %>
 
 <%= content_for(:after_js) do %>
 <script>
@@ -46,7 +46,19 @@
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        alert( response.routes[0].legs[1].distance.value / 1000 );
+        
+        const leg_array = response.routes[0].legs
+
+        leg_array.forEach((leg) => {
+         console.log(leg.distance.value / 1000);  
+        });
+
+         leg_array.forEach((leg) => {
+         console.log(leg.duration.text );  
+        });
+
+         /* response.routes[0].legs[1].distance.value; */
+        /* alert( response.routes[0].legs[1].duration.text ); */
       }
     });
   }

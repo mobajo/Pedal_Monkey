@@ -2,6 +2,7 @@ class TripsController < ApplicationController
   
   def index
     @trip = Trip.first
+    @average_stage_length = []
   end
 
   def show
