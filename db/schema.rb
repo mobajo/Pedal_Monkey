@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121150121) do
+ActiveRecord::Schema.define(version: 20171122151258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20171121150121) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.integer "price"
+    t.float "price"
     t.float "rating"
     t.bigint "end_stage_id"
     t.bigint "start_stage_id"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20171121150121) do
 
   create_table "stages", force: :cascade do |t|
     t.integer "stage_no"
-    t.integer "distance"
-    t.integer "elevation"
-    t.date "stage_date"
+    t.float "distance"
+    t.float "elevation"
+    t.date "stage_date
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20171121150121) do
 
   create_table "trips", force: :cascade do |t|
     t.string "title"
-    t.integer "distance"
-    t.integer "elevation"
+    t.float "distance"
+    t.float "elevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
