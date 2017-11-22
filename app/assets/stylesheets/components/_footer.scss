@@ -1,0 +1,37 @@
+.footer {
+  background: $brand-success;
+  margin-bottom: 0px;
+  padding-top: 20px; 
+  padding-bottom: 40px;
+  margin-top: 10px;
+}
+.footer-links {
+  align-items: center;
+}
+.footer-links a {
+  color: black;
+  opacity: 0.15;
+  text-decoration: none;
+  padding: 0px 10px;
+  font-size: 18px;
+
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+.footer {
+  color: white;
+}
+
+#footer-hr {
+  border-top: 1px solid white;
+  width: 170px;
+}
+
+#footer-row {
+  margin: 0px;
+}
+
+.footer p {
+  font-size: 13px;
+}
