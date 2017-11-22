@@ -10,17 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121150121) do
+ActiveRecord::Schema.define(version: 20171122170804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachinary_files", id: :serial, force: :cascade do |t|
+    t.string "attachinariable_type"
+    t.integer "attachinariable_id"
+    t.string "scope"
+    t.string "public_id"
+    t.string "version"
+    t.integer "width"
+    t.integer "height"
+    t.string "format"
+    t.string "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent"
+  end
 
   create_table "pitstops", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.integer "price"
+    t.float "price"
     t.float "rating"
     t.bigint "end_stage_id"
     t.bigint "start_stage_id"
@@ -32,8 +47,8 @@ ActiveRecord::Schema.define(version: 20171121150121) do
 
   create_table "stages", force: :cascade do |t|
     t.integer "stage_no"
-    t.integer "distance"
-    t.integer "elevation"
+    t.float "distance"
+    t.float "elevation"
     t.date "stage_date"
     t.bigint "trip_id"
     t.datetime "created_at", null: false
@@ -52,8 +67,8 @@ ActiveRecord::Schema.define(version: 20171121150121) do
 
   create_table "trips", force: :cascade do |t|
     t.string "title"
-    t.integer "distance"
-    t.integer "elevation"
+    t.float "distance"
+    t.float "elevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
