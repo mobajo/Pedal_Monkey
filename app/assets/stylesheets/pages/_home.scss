@@ -7,6 +7,10 @@ hr {
   border-top: 1px solid $brand-danger;
 }
 
+.outer-container {
+  margin-top: 20px;
+}
+
 .color-square {
   height: 150px;
   width: 100%;
@@ -15,7 +19,6 @@ hr {
 .color-yellow {
   background-color: $brand-info;
 }
-
 
 .color-gray {
   background-color: $gray;
@@ -40,9 +43,10 @@ body {
 .content-box {
   background-color: white;
   box-shadow: 1px 1px 1px $gray-base;
-  padding: 30px 15px 10px 20px;
+  padding: 50px 15px 10px 20px;
   margin-bottom: 20px;
-  margin-top: 30px;
+  margin-top: 70px;
+  text-align: center;
 }
 
 .content-box-gray {
@@ -63,6 +67,7 @@ body {
   color: white;
 }
 
+
 .content-headline-red {
   position: absolute;
   top: -40px;
@@ -81,4 +86,33 @@ body {
 .content-headline-red h3 {
   margin: 0px;
   padding: 0px;
+}
+
+.content-box-search {
+  background-color: white;
+  box-shadow: 1px 1px 1px $gray-base;
+  padding: 20px 15px 10px 20px;
+  margin-bottom: 20px;
+  margin-top: 70px;
+  text-align: center;
+}
+
+.content-headline-search {
+  position: absolute;
+  top: -40px;
+  left: 35%;
+  justify-content: center;
+  padding: 1px 10px;
+  margin-top: 10px;
+  background-color: $brand-success;
+  color: white;
+}
+#homepage-search {
+  position: absolute;
+  bottom: -10px;
+  left: 10px;
+  padding: 1px 10px;
+  margin-top: 10px;
+  background-color: white;
+  color: white;
 }

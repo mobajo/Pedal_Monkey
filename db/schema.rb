@@ -10,31 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120151901) do
+ActiveRecord::Schema.define(version: 20171120165135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "pitstops", force: :cascade do |t|
+  create_table "accommodations", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.integer "price"
     t.float "rating"
-    t.bigint "end_stage_id"
-    t.bigint "start_stage_id"
+    t.bigint "stage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["end_stage_id"], name: "index_pitstops_on_end_stage_id"
-    t.index ["start_stage_id"], name: "index_pitstops_on_start_stage_id"
+    t.index ["stage_id"], name: "index_accommodations_on_stage_id"
   end
 
   create_table "stages", force: :cascade do |t|
+    t.string "startpoint_address"
+    t.float "startpoint_latitude"
+    t.float "startpoint_longitude"
+    t.string "endpoint_address"
+    t.float "endpoint_latitude"
+    t.float "endpoint_longitude"
     t.integer "stage_no"
     t.integer "distance"
     t.integer "elevation"
-    t.date "stage_date"
     t.bigint "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,9 +56,11 @@ ActiveRecord::Schema.define(version: 20171120151901) do
   create_table "trips", force: :cascade do |t|
     t.string "title"
     t.integer "distance"
-    t.integer "elelevation"
+    t.integer "elevation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,10 +76,15 @@ ActiveRecord::Schema.define(version: 20171120151901) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "description"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accommodations", "stages"
   add_foreign_key "stages", "trips"
   add_foreign_key "trip_members", "trips"
   add_foreign_key "trip_members", "users"
