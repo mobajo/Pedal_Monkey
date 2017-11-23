@@ -7,6 +7,10 @@ hr {
   border-top: 1px solid $brand-danger;
 }
 
+.form-control {
+  color: black;
+}
+
 .outer-container {
   margin-top: 20px;
 }
@@ -88,16 +92,16 @@ body {
   padding: 0px;
 }
 
-.content-box-search {
+.content-box-create {
   background-color: white;
   box-shadow: 1px 1px 1px $gray-base;
-  padding: 20px 15px 10px 20px;
+  padding: 40px 15px 10px 20px;
   margin-bottom: 20px;
   margin-top: 70px;
   text-align: center;
 }
 
-.content-headline-search {
+.content-headline-create {
   position: absolute;
   top: -40px;
   left: 35%;
