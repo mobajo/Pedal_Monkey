@@ -54,41 +54,61 @@
         wayPointInterval = totalTripDistance / numberOfWaypoints 
 
         console.log(wayPointInterval);
-		
-		wayPointDistances = []
 
-		while (wayPointInterval * numberOfWaypoints <= totalTripDistance) {
-  		wayPointDistances.push(wayPointInterval)	
+        wayPointsDistance = [wayPointInterval]
+
+		let i = wayPointsDistance;
+		while (i.length <= (numberOfWaypoints - 2)) {
+
+		  i.push(wayPointInterval += wayPointInterval);
 		}
+		  console.log(i)
 
-		console.log(wayPointDistances)
 
 
         const leg_array = response.routes[0].legs
-
-        leg_array.forEach((leg) => {
-         leg.distance.value / numberOfWaypoints;  
-        });
-
-
-
-
 
          leg_array.forEach((leg) => {
          console.log(leg.duration.text );  
         });
 
 
-         let totalmeters = 0
-         const kmtest = response.routes[0].legs[0].steps
+         let totalmeters = 0;
 
-         kmtest.forEach((step) => {
+       /*  kmtest.forEach((step) => {
          totalmeters += step.distance.value;  
+        }); */
+
+
+        let kmtest = response.routes[0].legs[0].steps;
+		let step_array = []
+
+          wayPointsDistance.forEach((waypoint) => {
+			let i = 0;
+		
+			while (i <= waypoint) {
+	  	console.log(waypoint);
+
+			  kmtest.forEach((step) => {
+			  	i += step.distance.value;
+			  	step_array.push(step.start_location.lat)
+	  	console.log("lat: " + step.start_location.lat());
+	  	console.log("lng: " + step.start_location.lng());
+	  	debugger
+	  	console.log(typeof(step.start_location));
+			  });
+			};
         });
 
+        wayPointsCoordinates = []
+        console.log(step_array);
 
 
-         console.log(totalmeters)
+
+
+
+
+        /* console.log(totalmeters) */
          /* response.routes[0].legs[1].distance.value; */
         /* alert( response.routes[0].legs[1].duration.text ); */
       }
