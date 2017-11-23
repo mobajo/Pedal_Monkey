@@ -1,4 +1,4 @@
-
+<h1>index</h1>  
 
 
 
@@ -10,8 +10,8 @@
   <div id="directions" style='width: 800px; height: 400px;'></div>
 </div>
 
-    <%= start_address = @trip.stages.first.start_point.address %>
-    <%= destination_address = @trip.stages.last.end_point.address %>
+    <% start_address = @trip.stages.first.start_point.address %>
+    <% destination_address = @trip.stages.last.end_point.address %>
 
 <%= content_for(:after_js) do %>
 <script>
