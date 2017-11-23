@@ -23,24 +23,23 @@
     /* var origin      = new google.maps.LatLng(55.676097, 12.568337); */
     /* var destination = new google.maps.LatLng(55.663895, 12.542540); */
 
-   /* var waypts = [];
-     <% @trip.stages.each do |stage|  %>
-      <% break if stage.end_point.final_stop? %> 
-      var stop = '<%= raw stage.end_point.address %>' 
+    var waypts = [];
+    <% @trip.stages.each do |stage|  %>
+      <% break if stage.end_point.final_stop? %>
       var stop = '<%= raw stage.end_point.address %>'
       waypts.push({
           location: stop,
           stopover: true,
       });
     <% end %>
-    console.log(waypts) */
+    console.log(waypts)
 
     var request = {
       origin:             '<%= start_address %>',  
       /* document.getElementById('start').value, */
       destination:        '<%= destination_address %>',
-      /* waypoints:          waypts,
-      optimizeWaypoints:  true, */
+      waypoints:          waypts,
+      optimizeWaypoints:  true,
       travelMode:         google.maps.TravelMode.BICYCLING
 
     };
@@ -48,47 +47,19 @@
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         
-        numberOfWaypoints = 3
-        totalTripDistance = response.routes[0].legs[0].distance.value
-
-        wayPointInterval = totalTripDistance / numberOfWaypoints 
-
-        console.log(wayPointInterval);
-		
-		wayPointDistances = []
-
-		while (wayPointInterval * numberOfWaypoints <= totalTripDistance) {
-  		wayPointDistances.push(wayPointInterval)	
-		}
-
-		console.log(wayPointDistances)
-
-
         const leg_array = response.routes[0].legs
 
         leg_array.forEach((leg) => {
-         leg.distance.value / numberOfWaypoints;  
+         console.log(leg.distance.value / 1000);  
         });
-
-
-
-
 
          leg_array.forEach((leg) => {
          console.log(leg.duration.text );  
         });
 
+         const steps = response.routes[0].legs[0].steps[0].distance
+         console.log(steps);
 
-         let totalmeters = 0
-         const kmtest = response.routes[0].legs[0].steps
-
-         kmtest.forEach((step) => {
-         totalmeters += step.distance.value;  
-        });
-
-
-
-         console.log(totalmeters)
          /* response.routes[0].legs[1].distance.value; */
         /* alert( response.routes[0].legs[1].duration.text ); */
       }
