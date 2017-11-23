@@ -1,21 +1,21 @@
 <div class="navbar-wagon">
-    <div class="col-md-2 text-left hidden-xs hidden-sm">
+    <div class="col-md-3 text-left hidden-xs hidden-sm">
   <h2 class="text-left">PedalMonkey</h2>
     </div>
-    <div class="col-md-8 text-center">
+    <div class="col-md-6 text-center">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo1.png" %>
   <% end %>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm text-right">
 
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Host", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+
       <%= link_to "Trips", "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Messages", "#", class: "navbar-wagon-item navbar-wagon-link" %>
 
