@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    <%= if content_for?(:title||:name||:username) then yield(:title) + ' | ' end %>
+    <%= if content_for?(:title) then yield(:title||:name||:username||:id) + ' | ' end %>
     PedalMonkey
   </title>
 

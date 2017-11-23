@@ -1,7 +1,18 @@
-<h1>Trips#show</h1>
-<p>Find me in app/views/trips/show.html.erb</p>
+<div class="container">
 
-<div id="floating-panel">
+
+  <h1>Trips#show</h1>
+  <p>Find me in app/views/trips/show.html.erb</p>
+  <!-- p.end_stage.trip -->
+  <% @stages.each do |stage| %>
+  <p>Trip id: <%= stage.trip_id %></p>
+  <p>Stage no: <%= stage.stage_no %></p>
+  <p>Date: <%= stage.stage_date %></p>
+  <p>---</p>
+  <% end %>
+
+</div>
+<!-- <div id="floating-panel">
   <form action="" method="post">
     <label for="start">Where should your trip start?</label>
     <input id="start" type="text" name="Start of trip" placeholder="København">
@@ -21,7 +32,7 @@
 </div>
 
 
-<%= content_for(:after_js) do %>
+
 <script>
 
   var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -64,4 +75,4 @@
   });
 </script>
 
-<% end %>
+-->
