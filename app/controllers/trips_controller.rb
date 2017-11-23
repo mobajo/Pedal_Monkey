@@ -1,16 +1,13 @@
 class TripsController < ApplicationController
 
   def index
+    @trip = Trip.first
+    @average_stage_length = []
   end
 
   def show
     @trip = Trip.find(params[:id])
     @stages = @trip.stages
-
-    # @hash = Gmaps4rails.build_markers(@trip) do |flat, marker|
-    #   marker.lat flat.latitude
-    #   marker.lng flat.longitude
-    # end
   end
 
   def new

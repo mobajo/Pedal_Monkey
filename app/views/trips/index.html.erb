@@ -1,14 +1,7 @@
-<div id="floating-panel">
-  <form action="" method="post">
-    <label for="start">Where should your trip start?</label>
-    <input id="start" type="text" name="Start of trip" placeholder="København">
-    <label for="via">via</label>
-    <input id="via" type="text" name="via" placeholder="Berlin">
-    <label for="end">Where should your trip end?</label>
-    <input id="end" type="text" name="End of trip" placeholder="Paris">
-    <button onclick="calcRoute()">Find route</button> 
-  </form>
-</div>
+<h1>index</h1>  
+
+
+
 
 
 
@@ -17,6 +10,8 @@
   <div id="directions" style='width: 800px; height: 400px;'></div>
 </div>
 
+    <% start_address = @trip.stages.first.start_point.address %>
+    <% destination_address = @trip.stages.last.end_point.address %>
 
 <%= content_for(:after_js) do %>
 <script>
@@ -25,33 +20,49 @@
   var directionsService = new google.maps.DirectionsService();
 
   function calcRoute() {
-    var origin      = new google.maps.LatLng(55.676097, 12.568337);
-    var destination = new google.maps.LatLng(55.663895, 12.542540);
+    /* var origin      = new google.maps.LatLng(55.676097, 12.568337); */
+    /* var destination = new google.maps.LatLng(55.663895, 12.542540); */
 
     var waypts = [];
-    var stop = document.getElementById('via').value
-    waypts.push({
-        location: stop,
-        stopover: true,
-    });
+    <% @trip.stages.each do |stage|  %>
+      <% break if stage.end_point.final_stop? %>
+      var stop = '<%= raw stage.end_point.address %>'
+      waypts.push({
+          location: stop,
+          stopover: true,
+      });
+    <% end %>
+    console.log(waypts)
 
-    
     var request = {
-
-      origin:      document.getElementById('start').value,
-      destination: document.getElementById('end').value,
-      waypoints:  waypts,
-      optimizeWaypoints: true,
-      travelMode:  google.maps.TravelMode.BICYCLING
+      origin:             '<%= start_address %>',  
+      /* document.getElementById('start').value, */
+      destination:        '<%= destination_address %>',
+      waypoints:          waypts,
+      optimizeWaypoints:  true,
+      travelMode:         google.maps.TravelMode.BICYCLING
 
     };
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        alert( response.routes[0].legs[1].distance.value / 1000 );
+        
+        const leg_array = response.routes[0].legs
+
+        leg_array.forEach((leg) => {
+         console.log(leg.distance.value / 1000);  
+        });
+
+         leg_array.forEach((leg) => {
+         console.log(leg.duration.text );  
+        });
+
+         /* response.routes[0].legs[1].distance.value; */
+        /* alert( response.routes[0].legs[1].duration.text ); */
       }
     });
   }
+
 
   calcRoute();
 
