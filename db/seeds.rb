@@ -16,7 +16,7 @@ models.each do |model|
 end
 
 
-url = "https://goo.gl/images/4bCgk8"
+url = "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/2/000/0d2/278/3564222.jpg"
 user1 = User.new(
   username: "Jimbo",
   email: "jim.sterling@gmail.com",
@@ -27,7 +27,7 @@ user1 = User.new(
 user1.save
 user1.photo_url = url
 
-url = "https://goo.gl/images/YpZmYJ"
+url = "https://www.exeter.ac.uk/media/universityofexeter/communicationservices/responsive-images/rob-mitchell.jpg"
 user2 = User.new(
   username: "wiggo",
   email: "Chris.Smith@sky.com",
@@ -38,7 +38,7 @@ user2 = User.new(
 user2.save
 user2.photo_url = url
 
-url = "https://goo.gl/images/CyiujZ"
+url = "https://media-exp2.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAv_AAAAJDhlMmJkYTU5LTJiNDQtNDZkNi05MDEwLWFlNWY3ZDVlMjkzOA.jpg"
 user3 = User.new(
   username: "ilovecycling1968",
   email: "johnbell@aolcom",
@@ -49,7 +49,7 @@ user3 = User.new(
 user3.save
 user3.photo_url = url
 
-url = "https://goo.gl/images/fUh3ZF"
+url = "http://s202719.gridserver.com/wp-content/uploads/rob.jpg"
 user4 = User.new(
   username: "wppete",
   email: "petehorensby@stockport.com",
@@ -60,7 +60,7 @@ user4 = User.new(
 user4.save
 user4.photo_url = url
 
-URL = "https://goo.gl/images/StVhGQ"
+url = "http://d3n8a8pro7vhmx.cloudfront.net/australianlaborparty/pages/158/meta_images/original/Rob_Mitchell3x3.jpg?1465193206"
 user5 = User.new(
   username: "chrismcdermot",
   email: "cmcdermot@aol.com",
