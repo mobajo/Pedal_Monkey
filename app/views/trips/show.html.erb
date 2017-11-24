@@ -133,7 +133,8 @@
 
     if (waypointToggler === '' ) { 
       requestSelector = request } else { requestSelector = requestWithWaypoints }
-    console.log(requestSelector)       
+    console.log(requestSelector)    
+       
     /* Not totally sure about this code, but my guess is it fetches information for directions. It gives back a 'response', which contains all the needed */
 
     directionsService.route(requestSelector, function(response, status) {
