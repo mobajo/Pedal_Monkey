@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-mount Attachinary::Engine => "/attachinary"
+  mount Attachinary::Engine => "/attachinary"
 
 
   resources :trips do
