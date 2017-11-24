@@ -5,7 +5,7 @@
       <div class="content-headline-create">
         <h4>Where do you want to go?</h4>
       </div>
-      <%= form_tag(trips_path, method: :post) do %>
+      <%= form_tag(trips_path, method: :post, class: "form-inline") do %>
       <div class="col-xs-12 col-sm-2">
         <div>
           <%= label_tag(:start, "From:") %>
@@ -27,7 +27,7 @@
           <%= label_tag(:start_date, "Start date:") %>
         </div>
         <div class="text-left">
-          <%= date_field_tag(:start_date, value: '#{Date.today}') %>
+          <%= date_field_tag(:start_date, Date.today) %>
         </div>
       </div>
       <div class="col-xs-12 col-sm-2">
@@ -35,7 +35,7 @@
           <%= label_tag(:end_date, "End date:") %>
         </div>
         <div class="text-left">
-          <%= date_field_tag(:end_date, value: '#{Date.today}') %> 
+          <%= date_field_tag(:end_date, Date.today + 1) %> 
         </div>
       </div>
       <div class="col-xs-12 col-sm-2">
@@ -43,7 +43,7 @@
           .
         </div>
         <div class="text-left">
-          <%= submit_tag("Let's ride", class: "btn btn-danger", style: "width: 100%;") %>
+          <%= submit_tag("Let's ride", class: "btn btn-danger btn-pm", style: "width: 100%;") %>
         </div>
       </div>
       <% end %>
