@@ -140,3 +140,22 @@ label {
 .col-sm-2 {
   margin-right: 32px;
 }
+
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #999;
+  font-weight: bold;
+}
+
+.main-content a {
+  color: $brand-info;
+  font-weight: bold;
+}
+
+.main-content a:hover {
+  color: $brand-info;
+  text-decoration: none;
+  border-bottom: 2px solid $brand-success;
+}
