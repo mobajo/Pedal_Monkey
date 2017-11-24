@@ -6,15 +6,46 @@
         <h4>Where do you want to go?</h4>
       </div>
       <%= form_tag(trips_path, method: :post) do %>
-        <%= label_tag(:start, "From") %>
-        <%= text_field_tag(:start) %>
-        <%= label_tag(:finish, "To") %>
-        <%= text_field_tag(:finish) %>
-        <%= label_tag(:start_date, "Start date") %>
-        <%= date_field_tag(:start_date, placeholder: '#{Date.today}') %>
-        <%= label_tag(:end_date, "End date") %>
-        <%= date_field_tag(:end_date, placeholder: '#{Date.today}') %>
-        <%= submit_tag("Let's ride") %>
+      <div class="form-group col-xs-12 col-sm-2">
+        <div>
+          <%= label_tag(:start, "From:") %>
+        </div>
+        <div class="text-left">
+          <%= text_field_tag(:start, nil, placeholder: 'Copenhagen') %>
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-2">
+        <div class="text-left">
+          <%= label_tag(:finish, "To:") %>
+        </div>
+        <div class="text-left">
+          <%= text_field_tag(:finish, nil, placeholder: 'Berlin') %>
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-2">
+        <div class="text-left">
+          <%= label_tag(:start_date, "Start date:") %>
+        </div>
+        <div class="text-left">
+          <%= date_field_tag(:start_date, value: '#{Date.today}') %>
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-2">
+        <div class="text-left">
+          <%= label_tag(:end_date, "End date:") %>
+        </div>
+        <div class="text-left">
+          <%= date_field_tag(:end_date, value: '#{Date.today}') %> 
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-2">
+        <div class="text-left">
+          .
+        </div>
+        <div class="text-left" style="vertical-align: bottom;">
+          <%= submit_tag("Let's ride", class: "btn btn-danger", style: "width: 100%;") %>
+        </div>
+      </div>
       <% end %>
 
       <!-- <form class="form-inline" action="/trips" method="post">
