@@ -99,6 +99,7 @@ body {
   margin-bottom: 10px;
   margin-top: 70px;
   text-align: left;
+  justify-content: center;
 }
 
 .content-box-trip {
@@ -135,7 +136,7 @@ label {
   color: white;
 }
 
-.form-group {
-    margin-right: 10px;
-    margin-left: 10px;
+
+.col-sm-2 {
+  margin-right: 32px;
 }
