@@ -5,8 +5,9 @@ class Pitstop < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
-  geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  reverse_geocoded_by :latitude, :longitude,
+  :address => :location
+  after_validation :reverse_geocode
 
   def final_stop?
     self.end_stage ? self.end_stage.trip.stages.count == self.end_stage.stage_no : false

@@ -14,6 +14,7 @@ class TripsController < ApplicationController
   end
 
   def create
+
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
     
