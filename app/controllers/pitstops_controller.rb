@@ -9,9 +9,12 @@ class PitstopsController < ApplicationController
   end
 
   def update
+    @pitstop = Pitstop.find(params[:id])
   end
 
   def edit
+    @user = current_user
+    @pitstop = Pitstop.find(params[:id])
   end
 
   def destroy

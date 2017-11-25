@@ -62,11 +62,19 @@
         <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+
+         <!-- Edit test -->
+         <form method="post" id= "pitstop-edit" action="<%= pitstops_edit_path %>">
+          <input class="search-form" name="search_term" type="text">
+          <input type='hidden'>
+          <button type="submit" class="btn btn-info">Enter</button>
+        </form>
+        <!-- Edit test -->
       </div>
       <% end %>
 
     </div>
-    
+
     <div class="col-xs-12 col-sm-9">
 
       <div class="col-xs-12 content-box">
@@ -95,11 +103,11 @@
     /* var origin      = new google.maps.LatLng(55.676097, 12.568337); */
     /* var destination = new google.maps.LatLng(55.663895, 12.542540); */
 
-    /* This code iterates over each stage of a user trip and sets the waypoint(s) as the end_point address as defined by the user */ 
+    /* This code iterates over each stage of a user trip and sets the waypoint(s) as the end_point address as defined by the user */
 
     var waypts = [];
     <% @trip.stages.each do |stage|  %>
-      <% break if stage.end_point.final_stop? %> 
+      <% break if stage.end_point.final_stop? %>
       var stop = '<%= raw stage.end_point.address %>'
       waypts.push({
           location: stop,
@@ -111,10 +119,10 @@
 
     console.log(typeof waypointToggler)
 
-    /* This code specifies the input of the request sent to the google maps directions API. Origin (start of trip) and destination (end of trip) is defined by the trip user (lines 13:14). Waypoints are given as an array of object(?) */ 
+    /* This code specifies the input of the request sent to the google maps directions API. Origin (start of trip) and destination (end of trip) is defined by the trip user (lines 13:14). Waypoints are given as an array of object(?) */
 
     var requestWithWaypoints = {
-      origin:             '<%= start_address %>',  
+      origin:             '<%= start_address %>',
       destination:        '<%= destination_address %>',
       waypoints:          waypts,
       optimizeWaypoints:  true,
@@ -123,7 +131,7 @@
     };
 
     var request = {
-      origin:             '<%= start_address %>',  
+      origin:             '<%= start_address %>',
       destination:        '<%= destination_address %>',
       travelMode:         google.maps.TravelMode.BICYCLING
 
@@ -131,27 +139,27 @@
 
     requestSelector = "placeholder"
 
-    if (waypointToggler === '' ) { 
+    if (waypointToggler === '' ) {
       requestSelector = request } else { requestSelector = requestWithWaypoints }
-    console.log(requestSelector)       
+    console.log(requestSelector)
     /* Not totally sure about this code, but my guess is it fetches information for directions. It gives back a 'response', which contains all the needed */
 
     directionsService.route(requestSelector, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        
-        /* in this code the number of waypoints and intervals between each waypoint(wayPointsDistance) we want to autocreate, when the user specifies a start and end in the search, is defined. numberOfWaypoints is currently fixed, but should be made dynamic with what the user specifies in the search */ 
-        
+
+        /* in this code the number of waypoints and intervals between each waypoint(wayPointsDistance) we want to autocreate, when the user specifies a start and end in the search, is defined. numberOfWaypoints is currently fixed, but should be made dynamic with what the user specifies in the search */
+
         numberOfWaypoints = 3
         totalTripDistance = response.routes[0].legs[0].distance.value
 
-        wayPointInterval = totalTripDistance / numberOfWaypoints 
+        wayPointInterval = totalTripDistance / numberOfWaypoints
 
         /* console.log(wayPointInterval); */
 
         wayPointsDistance = [wayPointInterval]
 
-        /* Here the distance on the trip at which each waypoint should be is set. the waypoints are pushed into an array */    
+        /* Here the distance on the trip at which each waypoint should be is set. the waypoints are pushed into an array */
 
         let i = wayPointsDistance;
         while (i.length <= (numberOfWaypoints - 2)) {
@@ -166,16 +174,16 @@
         const leg_array = response.routes[0].legs
 
         leg_array.forEach((leg) => {
-         console.log(leg.duration.text );  
+         console.log(leg.duration.text );
        });
 
-        /* BOSS-CODE ALERT!! - this code gets the coordinates of the autocreated waypoints, when user searches. The code iterates over each step of the trip and fetches the length(distance) of the step. When the totalmeters count reaches a waypoint in the wayPointDistance array, it pushes the lat,lng coordinates of the start_location of the last step into an array. */        
+        /* BOSS-CODE ALERT!! - this code gets the coordinates of the autocreated waypoints, when user searches. The code iterates over each step of the trip and fetches the length(distance) of the step. When the totalmeters count reaches a waypoint in the wayPointDistance array, it pushes the lat,lng coordinates of the start_location of the last step into an array. */
 
         let step_array = [];
-        let kmtest = response.routes[0].legs[0].steps; 
+        let kmtest = response.routes[0].legs[0].steps;
         let totalmeters = 0;
         let j = 0;
-        
+
         wayPoint = wayPointsDistance[j];
 
         kmtest.forEach((step) => {

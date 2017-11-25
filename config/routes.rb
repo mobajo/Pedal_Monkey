@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :trips do
     resources :stages
   end
-  
+
+  post'/pitstops/:id', to: 'pitstops#edit', as: 'pitstop'
+
   get "dashboard", to: "trips#dashboard"
   get "designguide", to: "pages#designguide"
 
