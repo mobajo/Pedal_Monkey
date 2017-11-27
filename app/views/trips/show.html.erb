@@ -5,13 +5,13 @@
 <div class="container outer-container">
   <div class="col-xs-12 content-box-trip">
     <div class="content-headline-green">
-      <h4>Your trip: From <%= @trip.stages.first.start_point.address %> to <%= @trip.stages.last.end_point.address %></h4>
+     <h4>Your trip: From <%= @trip.stages.first.start_point.address %> to <%= @trip.stages.last.end_point.address %></h4>
     </div>
     <div class="col-xs-12 col-sm-3 text-center">
       <h3>Total distance:</h3>
       <h1>132</h1>
       <h3>Kilometers</h3>
-    </div>
+    </div>P
     <div class="col-xs-12 col-sm-3 text-center">
       <h3>Average</h3>
       <h1>44</h1>
@@ -55,6 +55,7 @@
     <div class="col-xs-12 col-sm-3">
 
       <% @stages.each do |stage| %>
+
       <div class="col-xs-12 content-box">
         <div class="content-headline-green">
           <h4>Stage <%= stage.stage_no %></h4>

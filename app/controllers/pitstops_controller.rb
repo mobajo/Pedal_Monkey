@@ -11,14 +11,23 @@ class PitstopsController < ApplicationController
 
 
   def edit
-
     @pitstop = Pitstop.find(params[:id])
+
   end
 
   def update
-    @pitstop = Pitstop.find(params[:id])
-    raise
-  end
+    #@trip = Trip.find(params[:trip_id])
+    #address = params[:address]
+    #stage = Stage.find(params[:stage_id])
+    #@pitstop = stage.end_point.address
+    stage = Stage.find(params[:stage_id])
+    pitstop = stage.end_point
+    pitstop.update(pitstop_params)
+    redirect_to trip_path(stage.trip)
+
+
+    end
+
   def destroy
   end
 
