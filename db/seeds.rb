@@ -23,7 +23,7 @@ user1 = User.new(
   first_name: "Jim",
   last_name: "Sterling",
   password: "123456",
-  description: "Cyling fan and amatur chef")
+  description: "Cycling fan and amateur chef")
 user1.save
 user1.photo_url = url
 
@@ -34,7 +34,7 @@ user2 = User.new(
   first_name: "Chris",
   last_name: "Smith",
   password: "123456",
-  description: "Experience cycle tourist")
+  description: "Experienced cycle tourist")
 user2.save
 user2.photo_url = url
 
@@ -56,7 +56,7 @@ user4 = User.new(
   first_name: "Peter",
   last_name: "Hornsby",
   password: "123456",
-  description: "Cylcled arond the work in 500 days")
+  description: "Cycled around the work in 500 days")
 user4.save
 user4.photo_url = url
 
@@ -76,7 +76,7 @@ puts '5 users created'
 
 trip1 = Trip.new(
   title: "Manchester to Bristol",
-
+  distance: 297
   )
 trip1.save
 puts '1 trip created'
@@ -135,7 +135,7 @@ pitstop1 = Pitstop.new(
 
 pitstop2 = Pitstop.new(
   name: 'First Night',
-  address: 'Shrewbury',
+  address: 'Shrewsbury',
   price: 200,
   rating: 4,
   end_stage: stage1,
