@@ -35,31 +35,34 @@ class TripsController < ApplicationController
         i << (wayPointInterval += wayPointInterval)
       end
 
-   all_steps = []
-
-    @doc.root.xpath("//distance//value").children.each do |child|
-      #totalmeters += child.text.to_i
-      all_steps << child.text.to_i
-    end
-
-   all_steps_without_total = all_steps.slice!(-1)
 
     totalmeters = 0
     step_array = []
     j = 0
+ #   array = []
 
     wayPoint = wayPointsDistance[j];
 
-  all_steps.each do |step|
-    totalmeters += step;
+    @doc.root.xpath("//step").each do |child|
+      break if j == wayPointsDistance.count
+      totalmeters += child.xpath('distance//value').text.to_i
+  #    array << child.xpath('distance//value').text.to_i
       if totalmeters > wayPoint
-        step_array << (step.start_location.lat())
-        step_array << (step.start_location.lng())
+        step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
         j += 1
         wayPoint = wayPointsDistance[j]
       end
-  end
-  raise
+    end
+
+ #   test_array = []
+ #
+ #   @doc.root.xpath("//step//distance//value").children.each do |child|
+ #     test_array << child.text.to_i
+ #   end
+ # raise
+
+ #  all_steps_without_total = all_steps.slice!(-1)
+
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
 
