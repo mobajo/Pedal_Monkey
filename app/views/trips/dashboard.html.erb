@@ -16,7 +16,6 @@
           <h4>Profile info</h4>
           <p><strong>Name</strong>: <%= current_user.first_name %> <%= current_user.last_name %></p>
           <p><strong>Username</strong>: <%= current_user.username %></p>
-          <p><strong>Email:</strong>: <%= current_user.email %></p>
           <p><strong>Description</strong>: <%= current_user.description %></p>
         </div>
         <div class="col-xs-6 text-center">
@@ -26,35 +25,44 @@
     </div>
 
     <div class="col-xs-12 content-box-trip">
-      <div class="content-headline-green">
-        <h4>Your trips</h4>
+      <div class="row">
+
+        <div class="content-headline-green">
+          <h4>Your trips</h4>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <h3>Name:</h3>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <h3>Dates</h3>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <h3>Distance</h3>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <h3>Team members</h3>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-3">
-        <h3>Name:</h3>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <h3>Dates</h3>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <h3>Distance</h3>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <h3>Team members</h3>
-      </div>
+
       <% current_user.trips.each do |trip| %>
-      <div class="col-xs-12 col-sm-3">
-        <p><%= trip.title %></p>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <p><%= trip.stages.first.stage_date %> - <%= trip.stages.first.stage_date %></p>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <p><%= trip.distance %> km</p>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-        <p><%= trip.trip_members.count %></p>
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          <p><%= trip.title.presence || "No name yet" %> </p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <p><%= trip.stages.first.stage_date %> - <%= trip.stages.first.stage_date %></p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <p><%= trip.distance || "0" %> km</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <% trip.trip_members.each do |member| %>
+          <%= cl_image_tag member.user.photo.path, class: "avatar" %>
+          <% end %> 
+        </div>
       </div>
       <% end %>
+      
     </div>
 
   </div>
