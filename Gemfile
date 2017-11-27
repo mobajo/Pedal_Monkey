@@ -14,6 +14,8 @@ gem "gmaps4rails"
 gem 'cloudinary'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
+gem 'nokogiri', '~> 1.8', '>= 1.8.1'
+gem 'google_directions'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

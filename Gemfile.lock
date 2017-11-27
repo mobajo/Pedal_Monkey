@@ -97,6 +97,8 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
+    google_directions (0.1.6.2)
+      nokogiri (>= 1.4.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.1)
@@ -245,10 +247,12 @@ DEPENDENCIES
   font-awesome-sass
   geocoder
   gmaps4rails
+  google_directions
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
   listen (~> 3.0.5)
+  nokogiri (~> 1.8, >= 1.8.1)
   pg
   pry-byebug
   pry-rails
