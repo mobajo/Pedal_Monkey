@@ -54,18 +54,33 @@
   <div class="row">
     <div class="col-xs-12 col-sm-3">
 
-      <% @stages.each do |stage| %>
-
+      <% stage = @stages.find_by_stage_no(1) %>
       <div class="col-xs-12 content-box">
         <div class="content-headline-green">
           <h4>Stage <%= stage.stage_no %></h4>
         </div>
-
         <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+        <!-- For start pitstop -->
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Select the stage start</a>
+              </h4>
+            </div>
+            <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
+              <%= form_for([@trip, stage, stage.end_point]) do |f| %>
+              <%= f.label :address %>
+              <%= f.text_field :address %>
+              <%= f.submit %>
+              <% end %>
+            </div>
+          </div>
+        </div>
 
-
+        <!-- For end pitstop -->
         <div class="panel-group">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -79,21 +94,49 @@
               <%= f.text_field :address %>
               <%= f.submit %>
               <% end %>
-
-
-
             </div>
           </div>
         </div>
-
-
-
-
-
-
       </div>
-      <% end %>
 
+      <% @stages.reject {|s| s.stage_no == 1 }.each do |stage| %>
+
+
+      <!-- For stage 1 only -->
+
+
+
+
+
+
+      <!-- For other stages -->
+
+      <div class="col-xs-12 content-box">
+        <div class="content-headline-green">
+          <h4>Stage <%= stage.stage_no %></h4>
+        </div>
+        <p><strong>Date:</strong> <%= stage.stage_date %></p>
+        <p><strong>Start:</strong> <%= stage.start_point.address %></p>
+        <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Select the stage end</a>
+              </h4>
+            </div>
+            <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
+              <%= form_for([@trip, stage, stage.end_point]) do |f| %>
+              <%= f.label :address %>
+              <%= f.text_field :address %>
+              <%= f.submit %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% end %>
     </div>
 
 
