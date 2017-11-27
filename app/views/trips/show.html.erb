@@ -52,6 +52,7 @@
         <% end %>
     </div>
   </div>
+</div>
 
 </div>
 
@@ -86,18 +87,45 @@
         <div class="content-headline-green">
           <h4>Stage <%= stage.stage_no %></h4>
         </div>
+
         <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
-        <%= form_for([@trip, stage, stage.end_point]) do |f| %>
-        <%= f.label :address %>
-        <%= f.text_field :address %>
-        <%= f.submit %>
-        <% end %>
+
+
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Select the stage end</a>
+              </h4>
+            </div>
+            <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
+              <%= form_for([@trip, stage, stage.end_point]) do |f| %>
+              <%= f.label :address %>
+              <%= f.text_field :address %>
+              <%= f.submit %>
+              <% end %>
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
       </div>
       <% end %>
 
     </div>
+
+
+
+
 
     <div class="col-xs-12 col-sm-9">
 
