@@ -12,7 +12,7 @@ hr {
 }
 
 .outer-container {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .color-square {
@@ -105,12 +105,22 @@ body {
   background-color: white;
   box-shadow: 1px 1px 1px $gray-base;
   padding: 40px 15px 10px 20px;
-  margin-bottom: 10px;
-  margin-top: 70px;
+  margin-bottom: 100px;
+  margin-top: 50px;
   text-align: left;
   display: flex;
   justify-content: space-between;
+}
 
+.content-headline-create {
+  position: absolute;
+  top: -40px;
+  left: 38%;
+  justify-content: center;
+  padding: 1px 10px;
+  margin-top: 10px;
+  background-color: $brand-success;
+  color: white;
 }
 
 .content-box-trip {
@@ -120,21 +130,6 @@ body {
   margin-bottom: 20px;
   margin-top: 80px; // -80px for top-map
   text-align: left;
-}
-
-.content-headline-create {
-  position: absolute;
-  top: -40px;
-  left: 35%;
-  justify-content: center;
-  padding: 1px 10px;
-  margin-top: 10px;
-  background-color: $brand-success;
-  color: white;
-}
-
-label {
-  font-family: Dosis, Helvetica, sans-serif;
 }
 
 #homepage-search {
@@ -168,4 +163,110 @@ label {
   color: $brand-info;
   text-decoration: none;
   border-bottom: 2px solid $brand-success;
+}
+
+.showafter { 
+ display: none;
+}
+.showhover:hover .showafter {
+ display : block;
+ transition: ease-in;
+}
+.showhover:hover .showbefore {
+ display : none;
+ transition: ease-out;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  font-family: Dosis, Helvetica, sans-serif;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.form-inline .form-control {
+  width: 100%;
+}
+
+.fade-in {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  z-index: 100;
+}
+
+#spreadsheets {
+  margin-top: 104px;
+  
+}
+
+.fade-in-banner {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+
+.fade-in-faster {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+}
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+@media (max-width: 960px) {
+  /* For a screen < 960px, this CSS will be read */
+  .content-headline-create {
+    left: 38%;
+  }
+}
+@media (max-width: 750px) {
+  /* For a screen < 720px, this CSS will be read */
+  .content-headline-create {
+    left: 38%;
+  }
+
+  .showafter { 
+    display: block;
+  }
+
+  .showbefore { 
+    display: none;
+  }
+}
+@media (max-width: 540px) {
+  /* For a screen < 540px, this CSS will be read */
+  .content-headline-create {
+    left: 21%;
+  }
+
+  .showafter { 
+    display: block;
+  }
+
+  .showbefore { 
+    display: none;
+  }
 }
