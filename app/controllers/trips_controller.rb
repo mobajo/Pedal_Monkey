@@ -17,10 +17,10 @@ class TripsController < ApplicationController
 
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
-    
+
     ####### 2 CREATING STAGES
     stages_create
-    
+
     ####### 3 CREATING PITSTOPS
     pitstops_create_first
     pitstop_create_last
@@ -51,7 +51,7 @@ class TripsController < ApplicationController
     stage_no = 1
     @first_stage = Stage.new(trip: @trip, stage_no: stage_no, stage_date: start_date)
     @first_stage.save
-    
+
     # 2.3 Iteration for creating remaining stages minus the last one
     end_date = params[:end_date]
     days = (end_date.to_date - start_date.to_date).to_i # WHAT IF TRIP IS ONLY ONE DAY
@@ -94,7 +94,7 @@ class TripsController < ApplicationController
       pitstop.save
     end
   end
-  
+
   def pitstop_create_last
     # 3.3 Creating last pitstop
     @pitstop = Pitstop.new
