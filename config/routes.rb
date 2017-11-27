@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   end
 
 
-get "pitstops/:id/edit", to: 'pitstops#edit'
-patch '/pitstops/:id', to: 'pitstops#update'
+#get "pitstops/:id/edit", to: 'pitstops#edit'
+#patch '/pitstops/:id', to: 'pitstops#update'
 
 get "dashboard", to: "trips#dashboard"
 get "designguide", to: "pages#designguide"
