@@ -62,7 +62,7 @@
         <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
-        <%= form_for(stage.end_point) do |f| %>
+        <%= form_for([@trip, stage, stage.end_point]) do |f| %>
         <%= f.label :address %>
         <%= f.text_field :address %>
         <%= f.submit %>

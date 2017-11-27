@@ -17,6 +17,7 @@ class PitstopsController < ApplicationController
 
   def update
     @pitstop = Pitstop.find(params[:id])
+    raise
   end
   def destroy
   end
