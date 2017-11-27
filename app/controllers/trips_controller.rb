@@ -18,6 +18,8 @@ class TripsController < ApplicationController
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
 
+
+
     ####### 3 CREATING STAGES
     start_date = params[:start_date]
     end_date = params[:end_date]
@@ -30,6 +32,7 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip)
     Pitstop.pitstops_create_last(end_address, @trip)
+
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
     @trip.save
@@ -49,4 +52,5 @@ class TripsController < ApplicationController
 
   def destroy
   end
+
 end
