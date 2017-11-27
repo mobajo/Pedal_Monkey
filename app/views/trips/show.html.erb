@@ -6,28 +6,28 @@
   <div class="col-xs-12 content-box-trip">
     <div class="content-headline-green">
      <h4>Your trip: From <%= @trip.stages.first.start_point.address %> to <%= @trip.stages.last.end_point.address %></h4>
-    </div>
-    <div class="col-xs-12 col-sm-3 text-center">
-      <h3>Total distance:</h3>
-      <h1>132</h1>
-      <h3>Kilometers</h3>
-    </div>
-    <div class="col-xs-12 col-sm-3 text-center">
-      <h3>Average</h3>
-      <h1>44</h1>
-      <h3>Km/day</h3>
-    </div>
-    <div class="col-xs-12 col-sm-3 text-center">
-      <h3>Duration</h3>
-      <h1><%= @trip.stages.count %></h1>
-      <h3>Days</h3>
-    </div>
-    <div class="col-xs-12 col-sm-3 text-center">
-      <h3>Team members</h3>
-      <h1><%= @trip.trip_members.count %></h1>
-      <h3>Bike riders</h3>
-    </div>
+   </div>
+   <div class="col-xs-12 col-sm-3 text-center">
+    <h3>Total distance:</h3>
+    <h1>132</h1>
+    <h3>Kilometers</h3>
   </div>
+  <div class="col-xs-12 col-sm-3 text-center">
+    <h3>Average</h3>
+    <h1>44</h1>
+    <h3>Km/day</h3>
+  </div>
+  <div class="col-xs-12 col-sm-3 text-center">
+    <h3>Duration</h3>
+    <h1><%= @trip.stages.count %></h1>
+    <h3>Days</h3>
+  </div>
+  <div class="col-xs-12 col-sm-3 text-center">
+    <h3>Team members</h3>
+    <h1><%= @trip.trip_members.count %></h1>
+    <h3>Bike riders</h3>
+  </div>
+</div>
 
 <!--   <div class="row">
     <div class="col-xs-12 content-box">
@@ -60,18 +60,48 @@
         <div class="content-headline-green">
           <h4>Stage <%= stage.stage_no %></h4>
         </div>
-        <p><strong>Date:</strong> <%= stage.stage_date %></p>
+
+    <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+
+
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+              </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+
+
+
         <%= form_for([@trip, stage, stage.end_point]) do |f| %>
         <%= f.label :address %>
         <%= f.text_field :address %>
         <%= f.submit %>
         <% end %>
+
+
+              <div class="panel-footer">Panel Footer</div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
       </div>
       <% end %>
 
     </div>
+
+
+
+
 
     <div class="col-xs-12 col-sm-9">
 
