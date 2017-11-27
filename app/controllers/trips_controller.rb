@@ -30,6 +30,7 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip)
     Pitstop.pitstops_create_last(end_address, @trip)
+
     # SAVE AND RENDER THE TRIP IF NO ERRORS
     @trip.save
     @trip_member = TripMember.create(trip: @trip, user: current_user)
