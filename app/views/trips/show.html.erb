@@ -29,6 +29,33 @@
   </div>
 </div>
 
+<div class="col-xs-12 content-box-trip">
+  <div class="row">
+    <div class="content-headline-green">
+      <h4>Team</h4>
+    </div>
+    <div class="col-xs-12 col-sm-4 text-center">
+      <h4>Created by:</h4>
+      <%= cl_image_tag @trip.trip_members.first.user.photo.path, class: "avatar-large avatar-bordered" %>
+    </div>
+    <div class="col-xs-12 col-sm-4 text-center">
+      <h4>Members:</h4>
+      <% @trip.trip_members.each do |member| %>
+        <%= cl_image_tag member.user.photo.path, class: "avatar-large avatar-bordered" %>
+      <% end %> 
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h4>Invite:</h4>
+      <%= form_for([@trip, @trip_member]) do |f| %>
+        <%= f.email_field :user, placeholder: "Email", class: "form-control" %>
+        <%= f.submit("Add team member", class: "btn btn-danger btn-pm") %>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+</div>
+
 <!--   <div class="row">
     <div class="col-xs-12 content-box">
       <div class="content-headline-green">
@@ -107,7 +134,7 @@
           <h4>Adjust your waypoints</h4>
         </div>
         <div>
-          <div id="directions2" style='width: 100%; min-height: 800px;'></div>
+          <div id="directions2" class="sticky-map"></div>
         </div>
       </div>
 

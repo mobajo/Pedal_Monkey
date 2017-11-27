@@ -47,7 +47,9 @@
       <% current_user.trips.each do |trip| %>
       <div class="row">
         <div class="col-xs-12 col-sm-3">
-          <p><%= trip.title.presence || "No name yet" %> </p>
+          <%= link_to trip_path(trip.id) do %>
+            <p><%= trip.title.presence || "No name yet" %> </p>
+          <% end %>
         </div>
         <div class="col-xs-12 col-sm-3">
           <p><%= trip.stages.first.stage_date %> - <%= trip.stages.first.stage_date %></p>

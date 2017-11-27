@@ -30,7 +30,7 @@ user1.photo_url = url
 url = "https://www.exeter.ac.uk/media/universityofexeter/communicationservices/responsive-images/rob-mitchell.jpg"
 user2 = User.new(
   username: "wiggo",
-  email: "Chris.Smith@sky.com",
+  email: "chris.Smith@sky.com",
   first_name: "Chris",
   last_name: "Smith",
   password: "123456",
@@ -41,7 +41,7 @@ user2.photo_url = url
 url = "https://media-exp2.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAv_AAAAJDhlMmJkYTU5LTJiNDQtNDZkNi05MDEwLWFlNWY3ZDVlMjkzOA.jpg"
 user3 = User.new(
   username: "ilovecycling1968",
-  email: "johnbell@aolcom",
+  email: "johnbell@aol.com",
   first_name: "John",
   last_name: "Bell",
   password: "123456",
