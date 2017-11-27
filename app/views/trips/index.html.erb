@@ -53,6 +53,10 @@
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+
+        console.log(response)
+        console.log(response.request.waypoints)
+
         
         /* in this code the number of waypoints and intervals between each waypoint(wayPointsDistance) we want to autocreate, when the user specifies a start and end in the search, is defined. numberOfWaypoints is currently fixed, but should be made dynamic with what the user specifies in the search */ 
         
