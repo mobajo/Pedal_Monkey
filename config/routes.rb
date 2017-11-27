@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :stages do
       resources :pitstops
     end
+    resources :trip_members, only: [:create]
   end
 
 
