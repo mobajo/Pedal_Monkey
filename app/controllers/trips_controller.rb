@@ -9,20 +9,20 @@ class TripsController < ApplicationController
     @trip_member = TripMember.new()
 
    # @average_stage_distance_km = @distance_in_km / (end_date.to_date - start_date.to_date).to_i
-  end
+ end
 
-  def new
-  end
+ def new
+ end
 
-  def create
+ def create
 
-    start_address = params[:start]
-    end_address = params[:finish]
-    start_date = params[:start_date]
-    end_date = params[:end_date]
+  start_address = params[:start]
+  end_address = params[:finish]
+  start_date = params[:start_date]
+  end_date = params[:end_date]
 
 
-    step_array = google_directions(start_address, end_address, start_date, end_date)
+  step_array = google_directions_locations(start_address, end_address, start_date, end_date)
 
  #   test_array = []
  #
@@ -47,6 +47,7 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_last(@trip, end_address)
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
+    @trip.distance = google_directions_total_distance(start_address, end_address)
     @trip.save
     @trip_member = TripMember.create(trip: @trip, user: current_user)
     if @trip.save
@@ -67,7 +68,7 @@ class TripsController < ApplicationController
 
   private
 
-  def google_directions(start_address, end_address, start_date, end_date)
+  def google_directions_locations(start_address, end_address, start_date, end_date)
     directions = GoogleDirections.new(start_address, end_address)
     drive_time_in_minutes = directions.drive_time_in_minutes
     distance_in_m = directions.distance.to_i
@@ -91,19 +92,26 @@ class TripsController < ApplicationController
     j = 0
  #   array = []
 
-    pitstop = pitstops_distance[j];
+ pitstop = pitstops_distance[j];
 
-    @doc.root.xpath("//step").each do |child|
-      break if j == pitstops_distance.count
-      totalmeters += child.xpath('distance//value').text.to_i
+ @doc.root.xpath("//step").each do |child|
+  break if j == pitstops_distance.count
+  totalmeters += child.xpath('distance//value').text.to_i
   #    array << child.xpath('distance//value').text.to_i
-      if totalmeters > pitstop
-        step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
-        j += 1
-        pitstop = pitstops_distance[j]
-      end
-    end
-    
-    return step_array
+  if totalmeters > pitstop
+    step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
+    j += 1
+    pitstop = pitstops_distance[j]
   end
+end
+
+return step_array
+end
+
+def google_directions_total_distance(start_address, end_address)
+  directions = GoogleDirections.new(start_address, end_address)
+  trip_total_km = directions.distance.to_i / 1000
+  return trip_total_km
+end
+
 end
