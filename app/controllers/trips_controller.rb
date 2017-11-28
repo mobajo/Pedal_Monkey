@@ -20,41 +20,7 @@ class TripsController < ApplicationController
     start_date = params[:start_date]
     end_date = params[:end_date]
 
-    directions = GoogleDirections.new(start_address, end_address)
-    drive_time_in_minutes = directions.drive_time_in_minutes
-    distance_in_m = directions.distance.to_i
-    xml = directions.xml
-    @doc = Nokogiri::XML(xml)
-
-    numberOfWaypoints = (end_date.to_date - start_date.to_date).to_i
-    totalTripDistance = distance_in_m
-    wayPointInterval = totalTripDistance / numberOfWaypoints
-    wayPointsDistance = [wayPointInterval]
-
-    i = wayPointsDistance;
-      while i.length <= (numberOfWaypoints - 2)
-        i << (wayPointInterval += wayPointInterval)
-      end
-
-
-    totalmeters = 0
-    step_array = []
-    j = 0
- #   array = []
-
-    wayPoint = wayPointsDistance[j];
-
-    @doc.root.xpath("//step").each do |child|
-      break if j == wayPointsDistance.count
-      totalmeters += child.xpath('distance//value').text.to_i
-  #    array << child.xpath('distance//value').text.to_i
-      if totalmeters > wayPoint
-        step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
-        j += 1
-        wayPoint = wayPointsDistance[j]
-      end
-    end
-
+    step_array = google_directions(start_address, end_address, start_date, end_date)
  #   test_array = []
  #
  #   @doc.root.xpath("//step//distance//value").children.each do |child|
@@ -75,9 +41,8 @@ class TripsController < ApplicationController
 
     ####### 4 CREATING PITSTOPS
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
-    Pitstop.pitstops_create_rest(@trip)
-    Pitstop.pitstops_create_last(end_address, @trip)
-
+    Pitstop.pitstops_create_rest(@trip, step_array)
+    Pitstop.pitstops_create_last(@trip, end_address)
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
     @trip.save
@@ -96,5 +61,47 @@ class TripsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def google_directions(start_address, end_address, start_date, end_date)
+    directions = GoogleDirections.new(start_address, end_address)
+    drive_time_in_minutes = directions.drive_time_in_minutes
+    distance_in_m = directions.distance.to_i
+    xml = directions.xml
+    @doc = Nokogiri::XML(xml)
+
+    number_of_days = (end_date.to_date - start_date.to_date).to_i
+    number_of_pitstops = number_of_days + 1
+    total_trip_distance = distance_in_m
+    pitstops_interval = total_trip_distance / number_of_days
+    # pitstops_distance = [pitstops_interval]
+
+    pitstops_distance = (0..total_trip_distance).step(pitstops_interval).to_a
+    # i = pitstops_distance;
+    #   while i.length <= (number_of_pitstops)
+    #     i << (pitstops_interval += pitstops_interval)
+    #   end
+
+    totalmeters = 0
+    step_array = []
+    j = 0
+ #   array = []
+
+    pitstop = pitstops_distance[j];
+
+    @doc.root.xpath("//step").each do |child|
+      break if j == pitstops_distance.count
+      totalmeters += child.xpath('distance//value').text.to_i
+  #    array << child.xpath('distance//value').text.to_i
+      if totalmeters > pitstop
+        step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
+        j += 1
+        pitstop = pitstops_distance[j]
+      end
+    end
+    
+    return step_array
   end
 end

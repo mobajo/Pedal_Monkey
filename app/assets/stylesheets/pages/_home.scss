@@ -11,12 +11,11 @@ hr {
   position: sticky !important;
   top: 0 !important;
   min-height: 800px;
-  position: fixed;
-  top: 0;
-  width:100%;
   z-index:100;
+  width: 100%;
+  position: -webkit-sticky;  // required for Safari
+  position: sticky;
 }
-
 .form-control {
   color: black;
 }
