@@ -51,6 +51,16 @@ body {
 
 .main-content {
   min-height: 80vh;
+  a {
+    color: $brand-success;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: $brand-success;
+    border-bottom: 3px solid $brand-info;
+  }
 }
 
 .content-box {
@@ -161,16 +171,6 @@ body {
   margin-bottom: 10px;
   color: #999;
   font-weight: bold;
-}
-
-.main-content a {
-  color: $brand-success;
-  font-weight: bold;
-}
-
-.main-content a:hover {
-  color: $brand-success;
-  border-bottom: 3px solid $brand-info;
 }
 
 .showafter { 

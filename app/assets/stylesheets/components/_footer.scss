@@ -4,10 +4,16 @@
   padding-top: 20px; 
   padding-bottom: 40px;
   margin-top: 30px;
+
+  a {
+    color: black;
+    opacity: 0.15;
+  }
 }
 .footer-links {
   align-items: center;
 }
+
 .footer-links a {
   color: black;
   opacity: 0.15;
@@ -16,9 +22,11 @@
   font-size: 18px;
 
 }
+
 .footer-links a:hover {
   opacity: 1;
 }
+
 .footer {
   color: white;
 }
