@@ -87,19 +87,10 @@ class TripsController < ApplicationController
     @doc = Nokogiri::XML(xml)
 
     number_of_days = (end_date.to_date - start_date.to_date).to_i + 1
-    # number_of_pitstops = number_of_days
     total_trip_distance = distance_in_m
-    pitstops_interval = total_trip_distance / (number_of_days - 1)
-    # pitstops_distance = [pitstops_interval]
+    pitstops_interval = total_trip_distance.fdiv(number_of_days).ceil
 
     pitstops_distance = (pitstops_interval..total_trip_distance).step(pitstops_interval).to_a
-    # i = pitstops_distance;
-    #   while i.length <= (number_of_pitstops)
-    #     i << (pitstops_interval += pitstops_interval)
-    #   end
-
-   # pitstops_distance.slice!(-1)
-   # pitstops_distance.slice!(0)
 
 
     totalmeters = 0
