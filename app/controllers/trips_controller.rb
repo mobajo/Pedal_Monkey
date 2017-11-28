@@ -20,7 +20,7 @@ class TripsController < ApplicationController
   end_address = params[:finish]
   start_date = params[:start_date]
   end_date = params[:end_date]
-
+  trip_name = params[:name]
 
   step_array = google_directions_locations(start_address, end_address, start_date, end_date)
 
@@ -49,6 +49,7 @@ class TripsController < ApplicationController
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
     @trip.distance = google_directions_total_distance(start_address, end_address)
+    @trip.title = trip_name
     @trip.save
     @trip_member = TripMember.create(trip: @trip, user: current_user)
     if @trip.save
