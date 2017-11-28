@@ -16,17 +16,11 @@ class PitstopsController < ApplicationController
   end
 
   def update
-    #@trip = Trip.find(params[:trip_id])
-    #address = params[:address]
-    #stage = Stage.find(params[:stage_id])
-    #@pitstop = stage.end_point.address
-    stage = Stage.find(params[:stage_id])
-    pitstop = stage.end_point
+    trip = Trip.find(params[:trip_id])
+    pitstop = Pitstop.find(params[:id])
     pitstop.update(pitstop_params)
-    redirect_to trip_path(stage.trip)
-
-
-    end
+    redirect_to trip_path(trip )
+  end
 
   def destroy
   end
