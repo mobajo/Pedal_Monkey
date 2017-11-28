@@ -79,6 +79,8 @@ class TripsController < ApplicationController
       }
     directions = GoogleDirections.new(start_address, end_address, cycle_options)
 
+    fail directions.status if directions.distance == 0
+
     drive_time_in_minutes = directions.drive_time_in_minutes
     distance_in_m = directions.distance.to_i
     xml = directions.xml
