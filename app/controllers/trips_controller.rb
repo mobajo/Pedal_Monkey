@@ -41,6 +41,7 @@ class TripsController < ApplicationController
     stage_no = 1
     @trip.set_stages(stage_no, start_date, end_date) # From Trip model
 
+
     ####### 4 CREATING PITSTOPS
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip, step_array)
@@ -83,15 +84,13 @@ class TripsController < ApplicationController
     xml = directions.xml
     @doc = Nokogiri::XML(xml)
 
-    raise
-
-    number_of_days = (end_date.to_date - start_date.to_date).to_i
-    number_of_pitstops = number_of_days + 1
+    number_of_days = (end_date.to_date - start_date.to_date).to_i + 1
+    # number_of_pitstops = number_of_days
     total_trip_distance = distance_in_m
-    pitstops_interval = total_trip_distance / number_of_days
+    pitstops_interval = total_trip_distance / (number_of_days - 1)
     # pitstops_distance = [pitstops_interval]
 
-    pitstops_distance = (0..total_trip_distance).step(pitstops_interval).to_a
+    pitstops_distance = (pitstops_interval..total_trip_distance).step(pitstops_interval).to_a
     # i = pitstops_distance;
     #   while i.length <= (number_of_pitstops)
     #     i << (pitstops_interval += pitstops_interval)
@@ -122,6 +121,7 @@ end
 
 return step_array
 end
+
 
 def google_directions_total_distance(start_address, end_address)
   directions = GoogleDirections.new(start_address, end_address)
