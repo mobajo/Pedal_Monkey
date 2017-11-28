@@ -68,12 +68,22 @@ class TripsController < ApplicationController
 
   private
 
+
   def google_directions_locations(start_address, end_address, start_date, end_date)
-    directions = GoogleDirections.new(start_address, end_address)
+     cycle_options = {
+      :language => :en,
+      :alternative => :true,
+      :sensor => :false,
+      :mode => :bicycling
+      }
+    directions = GoogleDirections.new(start_address, end_address, cycle_options)
+
     drive_time_in_minutes = directions.drive_time_in_minutes
     distance_in_m = directions.distance.to_i
     xml = directions.xml
     @doc = Nokogiri::XML(xml)
+
+    raise
 
     number_of_days = (end_date.to_date - start_date.to_date).to_i
     number_of_pitstops = number_of_days + 1
@@ -87,12 +97,17 @@ class TripsController < ApplicationController
     #     i << (pitstops_interval += pitstops_interval)
     #   end
 
+   # pitstops_distance.slice!(-1)
+   # pitstops_distance.slice!(0)
+
+
     totalmeters = 0
     step_array = []
     j = 0
- #   array = []
+   # array = []
 
  pitstop = pitstops_distance[j];
+
 
  @doc.root.xpath("//step").each do |child|
   break if j == pitstops_distance.count
