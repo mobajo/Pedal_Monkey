@@ -73,7 +73,7 @@ class TripsController < ApplicationController
   def google_directions_locations(start_address, end_address, start_date, end_date)
      cycle_options = {
       :language => :en,
-      :alternative => :true,
+      :alternative => :false,
       :sensor => :false,
       :mode => :bicycling
       }

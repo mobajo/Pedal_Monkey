@@ -19,6 +19,7 @@ class PitstopsController < ApplicationController
     trip = Trip.find(params[:trip_id])
     pitstop = Pitstop.find(params[:id])
     pitstop.update(pitstop_params)
+    find_place(pitstop.latitude, pitstop.longitude)
     redirect_to trip_path(trip )
   end
 
@@ -29,6 +30,18 @@ class PitstopsController < ApplicationController
 
   def pitstop_params
     params.require(:pitstop).permit(:name, :address, :latitude, :longitude, :price, :rating, :start_stage_id, :end_stage_id)
+  end
+
+  def find_place(lat, lng)
+        @client = GooglePlaces::Client.new(ENV['GOOGLE_API_BROWSER_KEY'])
+    spots = @client.spots(lat, lng, :types => 'lodging')
+raise
+
+    spot_array = []
+    spots.each do |spot|
+      spot_array << [spot.name, spot.vicinity, spot.rating]
+     # spot_array << spot.website
+    end
   end
 end
 
