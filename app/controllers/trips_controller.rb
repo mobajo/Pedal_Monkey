@@ -12,6 +12,7 @@ class TripsController < ApplicationController
  end
 
  def new
+  @trip = Trip.new
  end
 
  def create
@@ -20,6 +21,7 @@ class TripsController < ApplicationController
   end_address = params[:finish]
   start_date = params[:start_date]
   end_date = params[:end_date]
+  trip_name = params[:name]
 
 
   step_array = google_directions_locations(start_address, end_address, start_date, end_date)
@@ -35,7 +37,6 @@ class TripsController < ApplicationController
 
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
-
 
     ####### 3 CREATING STAGES
     stage_no = 1
@@ -83,7 +84,6 @@ class TripsController < ApplicationController
     xml = directions.xml
     @doc = Nokogiri::XML(xml)
 
-    raise
 
     number_of_days = (end_date.to_date - start_date.to_date).to_i
     number_of_pitstops = number_of_days + 1
