@@ -33,15 +33,16 @@ class PitstopsController < ApplicationController
   end
 
   def find_place(lat, lng)
-        @client = GooglePlaces::Client.new(ENV['GOOGLE_API_BROWSER_KEY'])
-    spots = @client.spots(lat, lng, :types => 'lodging')
-raise
+        client = GooglePlaces::Client.new(ENV['GOOGLE_API_BROWSER_KEY'])
+    spots = client.spots(lat, lng, :types => 'lodging')
+
 
     spot_array = []
     spots.each do |spot|
-      spot_array << [spot.name, spot.vicinity, spot.rating]
+      spot_array << {lat: spot.lat, lng: spot.lng, name: spot.name, vicinity: spot.vicinity, rating: spot.rating}
      # spot_array << spot.website
     end
+     raise
   end
 end
 
