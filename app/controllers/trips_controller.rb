@@ -112,8 +112,6 @@ class TripsController < ApplicationController
   end
 end
 
-
-raise
 return step_array
 end
 
