@@ -1,54 +1,29 @@
 <div class="container outer-container">
   <div class="col-xs-12 content-box-trip">
     <div class="content-headline-green">
-     <h4>Your trip: From <%= @trip.stages.first.start_point.address %> to <%= @trip.stages.last.end_point.address %></h4>
+     <h4>Trip stats</h4>
    </div>
    <div class="col-xs-12 col-sm-3 text-center">
-    <h3>Total distance:</h3>
+    <h3>Total distance</h3>
     <h1><%= @trip.distance.to_i %></h1>
     <h3>Kilometers</h3>
   </div>
   <div class="col-xs-12 col-sm-3 text-center">
     <h3>Average</h3>
-    <h1><%= (@trip.distance / @trip.stages.count) %></h1>
-    <h3>Km/day</h3>
-  </div>
-  <div class="col-xs-12 col-sm-3 text-center">
-    <h3>Duration</h3>
-    <h1><%= @trip.stages.count %></h1>
-    <h3>Days</h3>
-  </div>
-  <div class="col-xs-12 col-sm-3 text-center">
-    <h3>Team members</h3>
-    <h1><%= @trip.trip_members.count %></h1>
-    <h3>Bike riders</h3>
-  </div>
-</div>
-
-<div class="col-xs-12 content-box-trip">
-  <div class="row">
-    <div class="content-headline-green">
-      <h4>Team</h4>
+    <h1><%= (@trip.distance / @trip.stages.count).round(2) %></h1>
+      <h3>Km/day</h3>
+      </div>
+      <div class="col-xs-12 col-sm-3 text-center">
+      <h3>Duration</h3>
+      <h1><%= @trip.stages.count %></h1>
+      <h3>Days</h3>
     </div>
-    <div class="col-xs-12 col-sm-4 text-center">
-      <h4>Created by:</h4>
-      <%= cl_image_tag @trip.trip_members.first.user.photo.path, class: "avatar-large avatar-bordered" %>
-    </div>
-    <div class="col-xs-12 col-sm-4 text-center">
-      <h4>Members:</h4>
-      <% @trip.trip_members.each do |member| %>
-        <%= cl_image_tag member.user.photo.path, class: "avatar-large avatar-bordered" %>
-      <% end %>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-      <h4>Invite:</h4>
-      <%= form_for([@trip, @trip_member]) do |f| %>
-        <%= f.email_field :user, placeholder: "Email", class: "form-control" %>
-        <%= f.submit("Add team member", class: "btn btn-danger btn-pm") %>
-        <% end %>
+    <div class="col-xs-12 col-sm-3 text-center">
+      <h3>Team members</h3>
+      <h1><%= @trip.trip_members.count %></h1>
+      <h3>Bike riders</h3>
     </div>
   </div>
-</div>
 
 </div>
 
@@ -77,97 +52,122 @@
   <div class="row">
     <div class="container">
 
-    <div class="col-xs-12 col-sm-3">
+      <div class="col-xs-12 col-sm-3">
 
 
 
-      <!-- For stage 1 -->
+        <!-- For stage 1 -->
 
-      <% stage = @stages.find_by_stage_no(1) %>
-      <div class="col-xs-12 content-box">
-        <div class="content-headline-green">
-          <h4>Stage <%= stage.stage_no %></h4>
-        </div>
-        <p><strong>Date:</strong> <%= stage.stage_date %></p>
-        <p><strong>Start:</strong> <%= stage.start_point.address %></p>
-        <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+        <% stage = @stages.find_by_stage_no(1) %>
+        <div class="col-xs-12 content-box">
+          <div class="content-headline-green">
+            <h4>Stage <%= stage.stage_no %></h4>
+          </div>
+          <p><strong>Date:</strong> <%= stage.stage_date %></p>
+          <p><strong>Start:</strong> <%= stage.start_point.address %></p>
+          <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
 
-        <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Make a change</a>
-              </h4>
-            </div>
-            <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
-              <%= form_for([@trip, stage, stage.start_point]) do |f| %>
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Make a change</a>
+                </h4>
+              </div>
+              <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
+                <%= form_for([@trip, stage, stage.start_point]) do |f| %>
                 <%= f.label :Start %>
                 <%= f.text_field :address %>
                 <%= f.submit %>
-              <% end %>
+                <% end %>
 
-              <%= form_for([@trip, stage, stage.end_point]) do |f| %>
-              <%= f.label :End%>
-              <%= f.text_field :address %>
-              <%= f.submit %>
-              <% end %>
+                <%= form_for([@trip, stage, stage.end_point]) do |f| %>
+                <%= f.label :End%>
+                <%= f.text_field :address %>
+                <%= f.submit %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <% @stages.reject {|s| s.stage_no == 1 }.each do |stage| %>
-
+        <% @stages.reject {|s| s.stage_no == 1 }.each do |stage| %>
 
 
 
 
 
-      <!-- For other stages -->
 
-      <div class="col-xs-12 content-box">
-        <div class="content-headline-green">
-          <h4>Stage <%= stage.stage_no %></h4>
-        </div>
-        <p><strong>Date:</strong> <%= stage.stage_date %></p>
-        <p><strong>Start:</strong> <%= stage.start_point.address %></p>
-        <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
-        <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Make a change</a>
-              </h4>
-            </div>
-            <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
-              <%= form_for([@trip, stage, stage.end_point]) do |f| %>
-              <%= f.label :End %>
-              <%= f.text_field :address %>
-              <%= f.submit %>
-              <% end %>
+        <!-- For other stages -->
+
+        <div class="col-xs-12 content-box">
+          <div class="content-headline-green">
+            <h4>Stage <%= stage.stage_no %></h4>
+          </div>
+          <p><strong>Date:</strong> <%= stage.stage_date %></p>
+          <p><strong>Start:</strong> <%= stage.start_point.address %></p>
+          <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapse<%= stage.stage_no %>">Make a change</a>
+                </h4>
+              </div>
+              <div id="collapse<%= stage.stage_no %>" class="panel-collapse collapse">
+                <%= form_for([@trip, stage, stage.end_point]) do |f| %>
+                <%= f.label :End %>
+                <%= f.text_field :address %>
+                <%= f.submit %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
+
+        <% end %>
       </div>
 
-      <% end %>
-    </div>
 
+      <div class="col-xs-12 col-sm-9 sticky-content">
 
-    <div class="col-xs-12 col-sm-9">
-
-      <div class="col-xs-12 content-box">
-        <div class="content-headline-green">
-          <h4>Your route</h4>
+        <div class="col-xs-12 content-box">
+          <div class="content-headline-green">
+            <h4>Your route</h4>
+          </div>
+          <div>
+            <div id="directions" class="map"></div>
+          </div>
         </div>
-        <div>
-          <div id="directions" class="sticky-map"></div>
-        </div>
+      </div> 
+    </div> <!-- end sticky content -->
+    
+
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 content-box-trip">
+      <div class="content-headline-green">
+        <h4>Team</h4>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-center">
+        <h4>Created by:</h4>
+        <%= cl_image_tag @trip.trip_members.first.user.photo.path, class: "avatar-large avatar-bordered" %>
+      </div>
+      <div class="col-xs-12 col-sm-4 text-left">
+        <h4>Other riders:</h4>
+        <% @trip.trip_members.each do |member| %>
+        <%= cl_image_tag member.user.photo.path, class: "avatar-large avatar-bordered" %>
+        <% end %>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <h4>Invite:</h4>
+        <%= form_for([@trip, @trip_member]) do |f| %>
+        <%= f.email_field :user, placeholder: "Email", class: "form-control" %>
+        <%= f.submit("Add team member", class: "btn btn-danger btn-pm") %>
+        <% end %>
       </div>
     </div>
 
-    </div>
   </div>
+</div>
 </div>
 
 <% start_address = @trip.stages.first.start_point.address %>
@@ -175,6 +175,7 @@
 <%# raise %>
 
 <%= content_for(:after_js) do %>
+
 <script>
 
   var directionsDisplay = new google.maps.DirectionsRenderer();

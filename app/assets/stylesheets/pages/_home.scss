@@ -7,14 +7,15 @@ hr {
   border-top: 1px solid $brand-danger;
 }
 
-.sticky-map {
-  position: sticky !important;
-  top: 0 !important;
-  min-height: 800px;
-  z-index:100;
-  width: 100%;
-  position: -webkit-sticky;  // required for Safari
+.sticky-content {
+  position: -webkit-sticky;
   position: sticky;
+  top: 0;
+}
+
+.map {
+  height: 80vh;
+
 }
 .form-control {
   color: black;
