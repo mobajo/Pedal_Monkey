@@ -1,13 +1,14 @@
 class TripsController < ApplicationController
 
   def index
-    @trip = Trip.first
   end
 
   def show
     @trip = Trip.find(params[:id])
     @stages = @trip.stages
     @trip_member = TripMember.new()
+
+   # @average_stage_distance_km = @distance_in_km / (end_date.to_date - start_date.to_date).to_i
   end
 
   def new
@@ -20,7 +21,9 @@ class TripsController < ApplicationController
     start_date = params[:start_date]
     end_date = params[:end_date]
 
+
     step_array = google_directions(start_address, end_address, start_date, end_date)
+
  #   test_array = []
  #
  #   @doc.root.xpath("//step//distance//value").children.each do |child|
@@ -32,7 +35,6 @@ class TripsController < ApplicationController
 
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
-
 
 
     ####### 3 CREATING STAGES
