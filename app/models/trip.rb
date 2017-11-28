@@ -7,18 +7,17 @@ class Trip < ApplicationRecord
   end
 
   def set_stages(stage_no, start_date, end_date)
-    first_stage = stages.new(stage_no: 1, stage_date: start_date)
-    
+
     days = (end_date.to_date - start_date.to_date).to_i
     stage_date = start_date.to_date
-    
-    days.times do
-      stage = stages.new
-      stage_no += 1
-      stage.stage_no = stage_no
-      stage_date += 1
-      stage.stage_date = stage_date
+
+    days.times do |day_number|
+      stages.new(
+        stage_no: stage_no + day_number,
+        stage_date: stage_date + day_number
+        )
     end
+
   end
 
 end
