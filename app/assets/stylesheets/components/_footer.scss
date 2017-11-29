@@ -1,12 +1,11 @@
 .footer {
   background: $brand-success;
   margin-bottom: 0px;
-  padding-top: 20px; 
+  padding-top: 20px;
   padding-bottom: 40px;
   margin-top: 30px;
   a {
-    color: black;
-    opacity: 0.15;
+    color: white;
   }
 }
 .footer-links {
@@ -14,19 +13,14 @@
 }
 
 .footer-links a {
-  color: black;
-  opacity: 0.15;
+  color: white;
   text-decoration: none;
   padding: 0px 10px;
   font-size: 18px;
-  a {
-    color: black;
-    opacity: 0.15;
-  }
 }
 
 .footer-links a:hover {
-  opacity: 1;
+  border-bottom: 3px solid $brand-info;
 }
 
 .footer {
