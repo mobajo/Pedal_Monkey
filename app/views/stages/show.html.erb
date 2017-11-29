@@ -1,3 +1,5 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <div class="container">
   <div class="col-xs-12">
     <h1>Stage no. <%= @stage.stage_no %></h1>
@@ -12,14 +14,14 @@
       <p><strong>Start:</strong> <%= @stage.start_point.address %></p>
       <p><strong>Finish:</strong> <%= @stage.end_point.address %></p>
     </div>
-    
+
     <div class="col-xs-12 content-box">
       <div class="content-headline-green">
         <h4>Accommodation</h4>
       </div>
       <% if @stage.end_point.name.nil? %>
         <h4>Choose accommodation: </strong></h4>
-        
+
         ########### PUT GOOGLE PLACES LIST HERE #########
       <% else %>
 
@@ -40,10 +42,48 @@
         <h4>Route and elevation</h4>
       </div>
       <div>
+  <div id="chart_div"></div>
         ########### PUT MAP AND ELEVATION GRAPH HERE #########
       </div>
     </div>
-  </div> 
+  </div>
 </div> <!-- end sticky content -->
 
 </div>
+
+
+
+<script>
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Label');
+      data.addColumn('number', 'Elevation in m');
+
+      <% elevation_array = [] %>
+      <% @Elevation_samples.each do |sample| %>
+      <% elevation_array << ["", sample[:elevation].to_i] %>
+      <% end %>
+      <% #raise %>
+
+      data.addRows(<%= raw elevation_array %>);
+
+      var options = {
+        title: 'Elevation profile',
+        hAxis: {
+          title: 'Stage distance',
+        },
+        vAxis: {
+          title: 'Elevation in meters'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+        document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+</script>
