@@ -3,6 +3,9 @@ class StagesController < ApplicationController
   end
 
   def show
+    @user = current_user
+    @trip = Trip.find(params[:trip_id])
+    @stage = Stage.find(params[:id])
   end
 
   def new

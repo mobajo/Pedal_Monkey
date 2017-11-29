@@ -18,7 +18,7 @@
 
       <!-- Links when logged in -->
 
-      <%= link_to "New trip", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "New trip", new_trip_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -33,7 +33,7 @@
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
                 <%= link_to dashboard_path do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+                <i class="fa fa-user"></i> <%= t(".profile", default: "My dashboard") %>
                 <% end %>
               </li>
               <li>
@@ -68,7 +68,7 @@
             <%= link_to "Home", root_path %>
           </li>
           <li>
-            <%= link_to "New trip", root_path %>
+            <%= link_to "New trip", new_trip_path %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete do %>
