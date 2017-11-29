@@ -1,5 +1,5 @@
 class Trip < ApplicationRecord
-	has_many :trip_members
+	has_many :trip_members, dependent: :destroy
 	has_many :stages, dependent: :destroy
 
   def find_stage(num)
