@@ -1,0 +1,20 @@
+
+
+<%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
+<%= f.label :Start %>
+<%= f.text_field :address %>
+<%= f.submit %>
+<% end %>
+<% @hotels.each do |hotel| %>
+<ul>
+  <li><%= hotel[:name] %></li>
+  <li><%= hotel[:vicinity] %></li>
+  <li><%= hotel[:rating] %></li>
+</ul>
+
+
+
+
+<% end %>
+
+

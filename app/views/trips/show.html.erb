@@ -91,6 +91,7 @@
         <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+        <%= link_to "BUTTON: link version", edit_trip_stage_pitstop_path(@trip, stage, stage.end_point) %>
 
         <div class="panel-group">
           <div class="panel panel-default">
@@ -132,6 +133,7 @@
         <p><strong>Date:</strong> <%= stage.stage_date %></p>
         <p><strong>Start:</strong> <%= stage.start_point.address %></p>
         <p><strong>Finish:</strong> <%= stage.end_point.address %></p>
+         <%= link_to "BUTTON: link version", edit_trip_stage_pitstop_path(@trip, stage, stage.end_point) %>
         <div class="panel-group">
           <div class="panel panel-default">
             <div class="panel-heading">
