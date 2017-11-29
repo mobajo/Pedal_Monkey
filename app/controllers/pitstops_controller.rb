@@ -14,6 +14,7 @@ class PitstopsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @pitstop = Pitstop.find(params[:id])
     @hotels = find_places(@pitstop.latitude, @pitstop.longitude)
+
   end
 
   def update
@@ -40,6 +41,7 @@ class PitstopsController < ApplicationController
     spot_array = []
     spots.each do |spot|
       spot_array << { lat: spot.lat, lng: spot.lng, name: spot.name, vicinity: spot.vicinity, rating: spot.rating }
+
     end
   end
 end

@@ -12,6 +12,13 @@
   <li><%= hotel[:rating] %></li>
 </ul>
 
+  <div >
+    <%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
+    <%= f.label :Select %>
+    <%= f.text_field :address %>
+    <%= f.submit %>
+    <% end %>
+  </div>
 
 
 
