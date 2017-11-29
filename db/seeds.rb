@@ -134,7 +134,7 @@ pitstop1 = Pitstop.new(
  pitstop1.save
 
 pitstop2 = Pitstop.new(
-  name: 'First Night',
+  name: 'Shrewsbury Central Inn',
   address: 'Shrewsbury',
   price: 200,
   rating: 4,
