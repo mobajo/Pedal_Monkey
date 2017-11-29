@@ -1,2 +1,49 @@
-<h1>Stages#show</h1>
-<p>Find me in app/views/stages/show.html.erb</p>
+<div class="container">
+  <div class="col-xs-12">
+    <h1>Stage no. <%= @stage.stage_no %></h1>
+  </div>
+  <div class="col-xs-12 col-sm-5">
+
+    <div class="col-xs-12 content-box">
+      <div class="content-headline-green">
+        <h4>Basic stats</h4>
+      </div>
+      <p><strong>Date:</strong> <%= @stage.stage_date %></p>
+      <p><strong>Start:</strong> <%= @stage.start_point.address %></p>
+      <p><strong>Finish:</strong> <%= @stage.end_point.address %></p>
+    </div>
+    
+    <div class="col-xs-12 content-box">
+      <div class="content-headline-green">
+        <h4>Accommodation</h4>
+      </div>
+      <% if @stage.end_point.name.nil? %>
+        <h4>Choose accommodation: </strong></h4>
+        
+        ########### PUT GOOGLE PLACES LIST HERE #########
+      <% else %>
+
+        <h4><strong><%= @stage.end_point.name %></strong></h4>
+        <p>Price: <%= rand(400...1500) %> € a night | Rating: <%= @stage.end_point.rating %></p>
+        <hr />
+        <p><strong>Choose different accomodation:</strong></p>
+        ########### PUT GOOGLE PLACES LIST HERE #########
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-7 sticky-content">
+
+    <div class="col-xs-12 content-box">
+      <div class="content-headline-green">
+        <h4>Route and elevation</h4>
+      </div>
+      <div>
+        ########### PUT MAP AND ELEVATION GRAPH HERE #########
+      </div>
+    </div>
+  </div> 
+</div> <!-- end sticky content -->
+
+</div>
