@@ -99,8 +99,13 @@ GEM
     gmaps4rails (2.1.2)
     google_directions (0.1.6.2)
       nokogiri (>= 1.4.1)
+    google_maps_service (0.4.2)
+      hurley (~> 0.1)
+      multi_json (~> 1.11)
+      retriable (~> 2.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    hurley (0.2)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -184,6 +189,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    retriable (2.1.0)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -248,6 +254,7 @@ DEPENDENCIES
   geocoder
   gmaps4rails
   google_directions
+  google_maps_service
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
