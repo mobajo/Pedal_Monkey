@@ -99,8 +99,12 @@ GEM
     gmaps4rails (2.1.2)
     google_directions (0.1.6.2)
       nokogiri (>= 1.4.1)
+    google_places (1.0.0)
+      httparty (>= 0.13.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -130,6 +134,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.2)
+    multi_xml (0.6.0)
     netrc (0.11.0)
     nio4r (2.1.0)
     nokogiri (1.8.1)
@@ -248,6 +253,7 @@ DEPENDENCIES
   geocoder
   gmaps4rails
   google_directions
+  google_places
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails
