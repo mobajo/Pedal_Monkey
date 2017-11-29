@@ -16,6 +16,7 @@ gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 gem 'nokogiri', '~> 1.8', '>= 1.8.1'
 gem 'google_directions'
+gem 'google_maps_service'
 gem 'google_places'
 
 source 'https://rails-assets.org' do
