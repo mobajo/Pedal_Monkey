@@ -1,12 +1,19 @@
+<% if @trip.title.nil? %>
+  <%= content_for(:title, "Your trip" + " | PedalMonkey") %>
+<% else %>
+  <%= content_for(:title, @trip.title + " | PedalMonkey") %>
+<% end %>
 <div class="container outer-container">
-  <div class="col-xs-12 content-box-trip">
+  <div class="col-xs-12 content-box-trip"">
     <div class="content-headline-green">
      <h4>Trip stats</h4>
    </div>
    <div class="row fade-in">
 
     <div class="col-xs-12 text-center">
+      <% unless @trip.title.nil? %>
       <h1><%= @trip.title %></h1>
+      <% end %>
     </div>
 
     <div class="col-xs-12 col-sm-3 text-center">
@@ -26,31 +33,60 @@
         <h2><%= @trip.trip_members.count %></h2>
       </div>
     </div>
-  </div>
+    <div>
 
-</div>
-
-<div class="row">
-  <div class="container">
-
-    <div class="col-xs-12 col-sm-3">
-
-      <% @stages.each do |stage| %>
-
-      <div class="col-xs-12 content-box">
-        <div class="content-headline-green">
-          <h4>Stage <%= stage.stage_no %></h4>
+      <% if @trip.title.nil? %>
+      <div>
+        <div>
+          <p class="text-center" style="margin-top: 30px;">
+            <a data-toggle="collapse" href="#collapse">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>
+              Name your trip
+            </a>
+          </p>
         </div>
-        <h4><%= stage.stage_date.strftime("%A, %b %e %Y") %></h4>
-        <p><strong>Start address:</strong></p>
-        <p><%= stage.start_point.address %></p>
-        <p><strong>Stage finish:</strong></p>
-        <p><%= stage.end_point.address %></p>
-        <p class="text-right">
-          <%= link_to trip_stage_path(@trip, stage.id) do %>
-           <strong><i class="fa fa-pencil" aria-hidden="true"></i></strong> Edit stage
-         <% end %>
-       </p>
+        <div id="collapse" class="collapse">
+          <div class="col-xs-12">
+            <%= simple_form_for @trip, class: "form-inline" do |f|%>
+            <div class="text-left">
+              <%= f.input :title, label: false, placeholder: '"Summer holiday 2018"', class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group col-xs-12">
+            <%= f.submit("Go ahead", class: "btn btn-success col-xs-12", style: "width: 100%;") %>
+          </div>
+        </div>
+        <% end %> <!-- form end -->
+
+        </div>
+        <% end %> <!-- if end -->
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-4">
+
+        <% @stages.each do |stage| %>
+
+        <div class="col-xs-12 content-box">
+          <div class="content-headline-green">
+            <h4>Stage <%= stage.stage_no %></h4>
+          </div>
+          <h4><%= stage.stage_date.strftime("%A, %b %e %Y") %></h4>
+          <% unless stage.end_point.name.nil? %>
+          <p><strong>Hotel:</strong></p>
+          <p><%= stage.end_point.name %></p>
+          <% end %>
+          <p><strong>Start address:</strong></p>
+          <p><%= stage.start_point.address %></p>
+          <p><strong>Stage finish:</strong></p>
+          <p><%= stage.end_point.address %></p>
+          <p class="text-right">
+            <%= link_to trip_stage_path(@trip, stage.id) do %>
+            <strong><i class="fa fa-pencil" aria-hidden="true"></i></strong> Edit stage
+            <% end %>
+          </p>
         <!-- <div class="panel-group">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -73,7 +109,7 @@
     </div>
 
 
-    <div class="col-xs-12 col-sm-9 sticky-content">
+    <div class="col-xs-12 col-sm-8 sticky-content">
 
       <div class="col-xs-12 content-box">
         <div class="content-headline-green">
@@ -87,19 +123,13 @@
   </div> <!-- end sticky content -->
 
 
-  <div class="col-xs-12 col-sm-10 col-sm-offset-1 content-box">
+  <div class="col-xs-12 col-sm-12 col-sm-offset-0 content-box">
     <div class="content-headline-green">
       <h4>Team</h4>
     </div>
     <div class="col-xs-12 col-sm-4 text-center">
       <h4>Created by:</h4>
       <%= cl_image_tag @trip.trip_members.first.user.photo.path, class: "avatar-large avatar-bordered" %>
-    </div>
-    <div class="col-xs-12 col-sm-4 text-left">
-      <h4>Other riders:</h4>
-      <% @trip.trip_members.each do |member| %>
-      <%= cl_image_tag member.user.photo.path, class: "avatar-large avatar-bordered" %>
-      <% end %>
     </div>
     <div class="col-xs-12 col-sm-3">
       <h4>Invite:</h4>
@@ -108,10 +138,18 @@
       <%= f.submit("Add team member", class: "btn btn-danger btn-pm") %>
       <% end %>
     </div>
+    <div class="col-xs-12 col-sm-4 text-center">
+      <% if @trip.trip_members.size == 1 %>
+      <h4>Riding alone?</h4>
+      <h2><i class="fa fa-arrow-left" aria-hidden="true"></i></strong> Invite your friends!</h2>
+      <% else %>
+      <h4>Other riders:</h4>
+      <% @trip.trip_members.drop(1).each do |member| %>
+      <%= cl_image_tag member.user.photo.path, class: "avatar-large avatar-bordered" %>
+      <% end %>
+      <% end %>
+    </div>
   </div>
-
-</div>
-</div>
 </div>
 
 <% start_address = @trip.stages.first.start_point.address %>
