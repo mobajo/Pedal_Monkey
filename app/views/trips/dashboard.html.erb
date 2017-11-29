@@ -55,7 +55,7 @@
           <% end %>
         </div>
         <div class="col-xs-12 col-sm-3">
-          <p><%= trip.stages.first.stage_date %> - <%= trip.stages.first.stage_date %></p>
+          <p><%= trip.stages.first.stage_date.strftime("%a, %b %e") %> - <%= trip.stages.first.stage_date.strftime("%a, %b %e") %></p>
         </div>
         <div class="col-xs-12 col-sm-3">
           <p><%= trip.distance || "0" %> km</p>

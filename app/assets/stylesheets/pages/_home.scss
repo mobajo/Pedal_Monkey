@@ -50,12 +50,22 @@ body {
   color: black;
 }
 
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .main-content {
   min-height: 80vh;
   a {
     color: $brand-success;
     text-decoration: none;
     font-weight: bold;
+    i {
+      color: $brand-success;
+      text-decoration: none;
+      font-weight: bold;
+    }
   }
 
   a:hover {
@@ -72,7 +82,7 @@ body {
   margin-top: 70px;
   text-align: left;
   p {
-    margin: 0px 0 0px;
+    margin: 0px 0 5px;
   }
 }
 
@@ -155,6 +165,10 @@ body {
   text-align: left;
   h2 {
     font-size: 52px;
+  }
+  h1 {
+    margin-top: -15px;
+    padding-top: 0px;
   }
 }
 
