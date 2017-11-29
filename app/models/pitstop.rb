@@ -9,6 +9,12 @@ class Pitstop < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :fetch_address
 
+
+  def calculate_stage_distances
+    start_stage.compute_distance if start_stage
+    end_stage.compute_distance if end_stage
+  end
+
   def final_stop?
     self.end_stage ? self.end_stage.trip.stages.count == self.end_stage.stage_no : false
   end
@@ -40,7 +46,7 @@ class Pitstop < ApplicationRecord
     #   pitstop.end_stage = assign_stage
     #   assign_counter += 1
     #   assign_stage = trip.find_stage(assign_counter)
-    #   pitstop.start_stage = assign_stage  
+    #   pitstop.start_stage = assign_stage
     #   pitstop.latitude = step_array[i][0]
     #   pitstop.longitude = step_array[i][1]
     #   pitstop.save
@@ -49,16 +55,18 @@ class Pitstop < ApplicationRecord
     step_array.each do |step|
       pitstop = Pitstop.new
       pitstop.end_stage = assign_stage
+
       assign_counter += 1
       assign_stage = trip.find_stage(assign_counter)
-      pitstop.start_stage = assign_stage  
+      pitstop.start_stage = assign_stage
       pitstop.latitude = step[0]
       pitstop.longitude = step[1]
       pitstop.save
     end
-
+      trip.stages.each(&:compute_distance)
+      trip.update_distance
   end
-  
+
   def self.pitstops_create_last(trip, end_address)
     # 4.3 Creating last pitstop
     raise if end_address.nil?

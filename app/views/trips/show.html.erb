@@ -48,6 +48,7 @@
         <p><%= stage.end_point.address %></p>
         <p class="text-right">
           <%= link_to trip_stage_path(@trip, stage.id) do %>
+          <%= link_to "BUTTON: link version", edit_trip_stage_pitstop_path(@trip, stage, stage.end_point) %>
            <strong><i class="fa fa-pencil" aria-hidden="true"></i></strong> Edit stage
          <% end %>
        </p>
@@ -83,7 +84,7 @@
           <div id="directions" class="map"></div>
         </div>
       </div>
-    </div> 
+    </div>
   </div> <!-- end sticky content -->
 
 
