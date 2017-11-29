@@ -3,25 +3,24 @@
     <div class="content-headline-green">
      <h4>Trip stats</h4>
    </div>
-   <div class="col-xs-12 col-sm-3 text-center">
-    <h3>Total distance</h3>
-    <h1><%= @trip.distance.to_i %></h1>
-    <h3>Kilometers</h3>
-  </div>
-  <div class="col-xs-12 col-sm-3 text-center">
-    <h3>Average</h3>
-    <h1><%= (@trip.distance / @trip.stages.count).round(2) %></h1>
-      <h3>Km/day</h3>
-      </div>
-      <div class="col-xs-12 col-sm-3 text-center">
-      <h3>Duration</h3>
-      <h1><%= @trip.stages.count %></h1>
-      <h3>Days</h3>
+   <div class="row fade-in">
+
+     <div class="col-xs-12 col-sm-3 text-center">
+      <h4>Total distance</h4>
+      <h2><%= @trip.distance.to_i %> km</h2>
     </div>
     <div class="col-xs-12 col-sm-3 text-center">
-      <h3>Team members</h3>
-      <h1><%= @trip.trip_members.count %></h1>
-      <h3>Bike riders</h3>
+      <h4>Average daily distance</h4>
+      <h2><%= (@trip.distance / @trip.stages.count).round(2) %> km</h2>
+        </div>
+        <div class="col-xs-12 col-sm-3 text-center">
+        <h4>Duration</h4>
+        <h2><%= @trip.stages.count %> days</h2>
+      </div>
+      <div class="col-xs-12 col-sm-3 text-center">
+        <h4>Team members</h4>
+        <h2><%= @trip.trip_members.count %></h2>
+      </div>
     </div>
   </div>
 
