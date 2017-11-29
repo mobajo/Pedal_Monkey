@@ -71,6 +71,39 @@ user5 = User.new(
 user5.save
 user5.photo_url = url
 
+url = "https://avatars0.githubusercontent.com/u/29428058?s=460&v=4"
+user6 = User.new(
+  username: "BobbyMitchell",
+  email: "robmitchell@pedalmonkey.com",
+  first_name: "Rob",
+  last_name: "Mitchell",
+  password: "123456",
+  description: "Product Owner at PedalMonkey")
+user6.save
+user6.photo_url = url
+
+url = "https://avatars1.githubusercontent.com/u/4171460?s=400&v=4"
+user7 = User.new(
+  username: "mobajo",
+  email: "morten@pedalmonkey.com",
+  first_name: "Morten",
+  last_name: "HBang-Jorgenson",
+  password: "123456",
+  description: "Design Lead at PedalMonkey")
+user7.save
+user7.photo_url = url
+
+url = "https://avatars2.githubusercontent.com/u/28492858?s=400&v=4"
+user8 = User.new(
+  username: "NielsMH",
+  email: "niels@pedalmonkey.com",
+  first_name: "Niels",
+  last_name: "Moller-Hansen",
+  password: "123456",
+  description: "bla bla bla bla")
+user8.save
+user8.photo_url = url
+
 
 puts '5 users created'
 
