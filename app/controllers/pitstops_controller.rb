@@ -40,7 +40,7 @@ end
 
 def find_places(lat, lng)
   client = GooglePlaces::Client.new(ENV['GOOGLE_API_BROWSER_KEY'])
-  spots = client.spots(lat, lng, :types => 'lodging')
+  spots = client.spots(lat, lng, types: 'lodging')
 
   spot_array = []
   spots.each do |spot|

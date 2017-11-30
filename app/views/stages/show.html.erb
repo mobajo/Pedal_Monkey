@@ -1,7 +1,7 @@
 <% if @trip.title.nil? %>
-  <%= content_for(:title, "Your trip | PedalMonkey") %>
+<%= content_for(:title, "Your trip | PedalMonkey") %>
 <% else %>
-  <%= content_for(:title, "Stage " + @stage.stage_no.to_s + ": " + @trip.title + " | PedalMonkey") %>
+<%= content_for(:title, "Stage " + @stage.stage_no.to_s + ": " + @trip.title + " | PedalMonkey") %>
 <% end %>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -27,16 +27,17 @@
         <h4>Accommodation</h4>
       </div>
       <% if @stage.end_point.name.nil? %>
-        <h4>Choose accommodation: </strong></h4>
+      <h4>Choose accommodation: </strong></h4>
 
-        ########### PUT GOOGLE PLACES LIST HERE #########
+      <%= render partial: "accommodation_form" %>
+
       <% else %>
 
-        <h4><strong><%= @stage.end_point.name %></strong></h4>
-        <p>Price: <%= rand(400...1500) %> € a night | Rating: <%= @stage.end_point.rating %></p>
-        <hr />
-        <p><strong>Choose different accomodation:</strong></p>
-        ########### PUT GOOGLE PLACES LIST HERE #########
+      <h4><strong><%= @stage.end_point.name %></strong></h4>
+      <p>Price: <%= rand(400...1500) %> € a night | Rating: <%= @stage.end_point.rating %></p>
+      <hr />
+      <p><strong>Choose different accomodation:</strong></p>
+      ########### PUT GOOGLE PLACES LIST HERE #########
       <% end %>
     </div>
   </div>
@@ -49,7 +50,7 @@
         <h4>Route and elevation</h4>
       </div>
       <div>
-  <div id="chart_div"></div>
+        <div id="chart_div"></div>
         ########### PUT MAP AND ELEVATION GRAPH HERE #########
       </div>
     </div>
@@ -62,38 +63,38 @@
 <%= content_for(:after_js) do %>
 
 <script>
-      google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawBasic);
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
 
-function drawBasic() {
+  function drawBasic() {
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Label');
-      data.addColumn('number', 'Elevation in m');
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Label');
+    data.addColumn('number', 'Elevation in m');
 
-      <% elevation_array = [] %>
-      <% @Elevation_samples.each do |sample| %>
-      <% elevation_array << ["", sample[:elevation].to_i] %>
-      <% end %>
-      <% #raise %>
+    <% elevation_array = [] %>
+    <% @Elevation_samples.each do |sample| %>
+    <% elevation_array << ["", sample[:elevation].to_i] %>
+    <% end %>
+    <% #raise %>
 
-      data.addRows(<%= raw elevation_array %>);
+    data.addRows(<%= raw elevation_array %>);
 
-      var options = {
-        title: 'Elevation profile',
-        hAxis: {
-          title: 'Stage distance',
-        },
-        vAxis: {
-          title: 'Elevation in meters'
-        }
-      };
+    var options = {
+      title: 'Elevation profile',
+      hAxis: {
+        title: 'Stage distance',
+      },
+      vAxis: {
+        title: 'Elevation in meters'
+      }
+    };
 
-      var chart = new google.visualization.ColumnChart(
-        document.getElementById('chart_div'));
+    var chart = new google.visualization.ColumnChart(
+      document.getElementById('chart_div'));
 
-      chart.draw(data, options);
-    }
+    chart.draw(data, options);
+  }
 </script>
 
 <% end %>

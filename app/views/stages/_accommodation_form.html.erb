@@ -1,0 +1,46 @@
+
+<script>
+
+    function update_address(address) {
+      document.getElementById("pitstop_address").value = address;
+
+    };
+</script>
+<%= form_for(:pitstop, url: trip_stage_pitstop_path(stage_id: @stage.id), method: :patch) do |f| %>
+<%= f.hidden_field :id %>
+<%= f.text_field :address, class: "form-control" %>
+<%= f.submit class: "btn btn-danger" %>
+<% end %>
+
+<% hotel_no = 1 %>
+<% @hotels.each do |hotel| %>
+<div id="clickChangeAddress" onclick="update_address('<%= hotel[:vicinity] %>');" style="cursor: pointer;">
+
+  <h4><%= hotel_no %>: <%= hotel[:name] %></h4>
+  <% hotel_no += 1 %>
+  <p><%= hotel[:vicinity] %></p>
+  <p>Rating: <%= hotel[:rating] %></p>
+  
+</div>
+
+<% end %>
+
+<!-- <button class="btn btn-danger" value=" hotel[:vicinity] " onclick="changeValue( hotel[:vicinity])">Select hotel</button> -->
+
+  <!-- <div>
+    <%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
+    <%= f.label :Address %>
+    <%= f.text_field :address %>
+    <%= f.submit %>
+    <% end %>
+  </div> -->
+
+  <%= content_for(:after_js) do %>
+
+  <script>
+   function changeValue(o){
+     document.getElementById('address').value=o.innerHTML;
+   }
+ </script>
+
+ <% end %>
