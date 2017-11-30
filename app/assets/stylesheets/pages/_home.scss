@@ -72,6 +72,12 @@ body {
     color: $brand-success;
     border-bottom: 3px solid $brand-info;
   }
+
+  i {
+    color: $brand-success;
+    text-decoration: none;
+    font-weight: bold;
+  }
 }
 
 .content-box {

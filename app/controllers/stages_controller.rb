@@ -27,17 +27,6 @@ def create
 end
 
 def update
-  trip = Trip.find(params[:trip_id])
-  stage = Stage.find(params[:stage_id])
-  pitstop = Pitstop.find(params[:id])
-  if pitstop.update(pitstop_params)
-    raise
-    #find_places(@pitstop.latitude, @pitstop.longitude)
-    redirect_to trip_stage_path(trip, stage)
-  else
-   raise
-   render :new
- end
 end
 
 def edit
