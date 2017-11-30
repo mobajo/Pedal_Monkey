@@ -1,73 +1,86 @@
 <div class="container outer-cointainer">
-  <h2>Dashboard</h2>
+  <h2><%= content_for(:title, "Dashboard | PedalMonkey") %></h2>
 
 
-    <div class="col-xs-12 content-box-trip">
+  <div class="col-xs-12 content-box-trip">
+    <div class="content-headline-green">
+      <h4>Hi, <%= current_user.first_name %>!</h4>
+    </div>
+    <div class="col-xs-12 col-sm-5">
+      <div class="col-xs-4 text-left">
+        <%= cl_image_tag current_user.photo.path, class: "avatar-large avatar-bordered text-right" %>
+      </div>
+      <div class="col-xs-8 text-left">
+        <h4>Profile info</h4>
+        <p><strong>Name</strong>: <%= current_user.first_name %> <%= current_user.last_name %></p>
+        <p><strong>Username</strong>: <%= current_user.username %></p>
+        <p><strong>Description</strong>: <%= current_user.description %></p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-7">
+      <div class="row">
+        <h4>You are part of <%= current_user.trips.count %> trips! </h4>
+      </div>
+      <div class="row">
+        <p><%= link_to "Create another trip", new_trip_path %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 content-box">
+    <div class="row">
+
       <div class="content-headline-green">
-        <h4>Hi, <%= current_user.first_name %>!</h4>
+        <h4>Your trips</h4>
       </div>
-      <div class="col-xs-12 col-sm-5">
-        <div class="col-xs-4 text-left">
-          <%= cl_image_tag current_user.photo.path, class: "avatar-large avatar-bordered text-right" %>
-        </div>
-        <div class="col-xs-8 text-left">
-          <h4>Profile info</h4>
-          <p><strong>Name</strong>: <%= current_user.first_name %> <%= current_user.last_name %></p>
-          <p><strong>Username</strong>: <%= current_user.username %></p>
-          <p><strong>Description</strong>: <%= current_user.description %></p>
-        </div>
+      <div class="col-xs-12 col-sm-3">
+        <h3>Name:</h3>
       </div>
-      <div class="col-xs-12 col-sm-7">
-        <div class="row">
-          <h4>You are part of <%= current_user.trips.count %> trips! </h4>
-        </div>
-        <div class="row">
-          <p><%= link_to "Create another trip", new_trip_path %></p>
-        </div>
+      <div class="col-xs-12 col-sm-3">
+        <h3>Dates</h3>
+      </div>
+      <div class="col-xs-12 col-sm-2">
+        <h3>Distance</h3>
+      </div>
+      <div class="col-xs-12 col-sm-2">
+        <h3>Team</h3>
+      </div>
+      <div class="col-xs-12 col-sm-1">
+        <h3>Action</h3>
       </div>
     </div>
 
-    <div class="col-xs-12 content-box">
-      <div class="row">
-
-        <div class="content-headline-green">
-          <h4>Your trips</h4>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <h3>Name:</h3>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <h3>Dates</h3>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <h3>Distance</h3>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <h3>Team members</h3>
-        </div>
-      </div>
-
-      <% current_user.trips.each do |trip| %>
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">
+    <% current_user.trips.each do |trip| %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-3">
+        <p>
           <%= link_to trip_path(trip.id) do %>
-          <p><%= trip.title.presence || "No name yet" %> </p>
+          <%= trip.title.presence || "No name yet" %>
           <% end %>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <p><%= trip.stages.first.stage_date.strftime("%a, %b %e") %> - <%= trip.stages.first.stage_date.strftime("%a, %b %e") %></p>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <p><%= trip.distance || "0" %> km</p>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <% trip.trip_members.each do |member| %>
-          <%= cl_image_tag member.user.photo.path, class: "avatar" %>
-          <% end %> 
-        </div>
+        </p>
       </div>
-      <% end %>
-      
+      <div class="col-xs-12 col-sm-3">
+        <p><%= trip.stages.first.stage_date.strftime("%a, %b %e") %> - <%= trip.stages.last.stage_date.strftime("%a, %b %e") %></p>
+      </div>
+      <div class="col-xs-12 col-sm-2">
+        <p><%= trip.distance.to_i || "0" %> km</p>
+      </div>
+      <div class="col-xs-12 col-sm-2">
+        <% trip.trip_members.each do |member| %>
+        <%= cl_image_tag member.user.photo.path, class: "avatar" %>
+        <% end %> 
+      </div>
+      <div class="col-xs-12 col-sm-1">
+        <%= link_to trip_path(trip), method: :delete do %>
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        <% end %> 
+        <%= link_to trip_path(trip.id) do %>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <% end %> 
+      </div>
     </div>
+    <% end %>
+
+  </div>
 
 </div>

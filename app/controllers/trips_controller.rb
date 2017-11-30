@@ -64,17 +64,29 @@ class TripsController < ApplicationController
   end
 
   def update
+    @trip = Trip.find(params[:id])
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    else
+      render :new
+    end
   end
 
   def destroy
+    @trip = Trip.find(params[:id])
+    @trip.destroy
+    redirect_to dashboard_path
   end
 
   private
 
+  def trip_params
+    params.require(:trip).permit(:title, :start_date, :end_date, :start_address, :end_address, :distance)
+  end
 
   def google_directions_locations(start_address, end_address, start_date, end_date)
-     cycle_options = {
-      :language => :en,
+   cycle_options = {
+    :language => :en,
       :alternative => :false,   #changed by rm from false
       :sensor => :false,
       :mode => :bicycling,
@@ -101,12 +113,12 @@ class TripsController < ApplicationController
     j = 0
    # array = []
 
- pitstop = pitstops_distance[j];
+   pitstop = pitstops_distance[j];
 
 
- @doc.root.xpath("//step").each do |child|
-  break if j == pitstops_distance.count
-  totalmeters += child.xpath('distance//value').text.to_i
+   @doc.root.xpath("//step").each do |child|
+    break if j == pitstops_distance.count
+    totalmeters += child.xpath('distance//value').text.to_i
   #    array << child.xpath('distance//value').text.to_i
   if totalmeters > pitstop
     step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
