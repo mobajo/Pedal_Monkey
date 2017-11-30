@@ -1,27 +1,46 @@
 
+<script>
 
+    function myclick(event) {
+      document.getElementById("text").value = "whatever";
+
+    };
+</script>
 <%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
-<%= f.label :Start %>
-<%= f.text_field :address %>
-<%= f.submit %>
+<%= f.text_field :address, class: "form-control", id: "text", name: "address" %>
+<%= f.submit class: "btn btn-danger" %>
 <% end %>
-<% @hotels.each do |hotel| %>
-<ul>
-  <li><%= hotel[:name] %></li>
-  <li><%= hotel[:vicinity] %></li>
-  <li><%= hotel[:rating] %></li>
-</ul>
 
-  <div >
+<% hotel_no = 1 %>
+<% @hotels.each do |hotel| %>
+<div id="theclick" onclick="myclick(event);" style="cursor: pointer;">
+
+  <h4><%= hotel_no %>: <%= hotel[:name] %></h4>
+  <% hotel_no += 1 %>
+  <p><%= hotel[:vicinity] %></p>
+  <p>Rating: <%= hotel[:rating] %></p>
+  
+  
+</div>
+
+<% end %>
+
+<!-- <button class="btn btn-danger" value=" hotel[:vicinity] " onclick="changeValue( hotel[:vicinity])">Select hotel</button> -->
+
+  <!-- <div>
     <%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
-    <%= f.label :Select %>
+    <%= f.label :Address %>
     <%= f.text_field :address %>
     <%= f.submit %>
     <% end %>
-  </div>
+  </div> -->
 
+  <%= content_for(:after_js) do %>
 
+  <script>
+   function changeValue(o){
+     document.getElementById('address').value=o.innerHTML;
+   }
+ </script>
 
-<% end %>
-
-
+ <% end %>

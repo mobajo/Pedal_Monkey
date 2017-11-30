@@ -19,6 +19,7 @@
       <p><strong>Date:</strong> <%= @stage.stage_date %></p>
       <p><strong>Start:</strong> <%= @stage.start_point.address %></p>
       <p><strong>Finish:</strong> <%= @stage.end_point.address %></p>
+      <%= link_to "BUTTON: link version", edit_trip_stage_pitstop_path(@trip.id, @stage.end_point) %>
     </div>
 
     <div class="col-xs-12 content-box">
@@ -58,6 +59,7 @@
 </div>
 
 
+<%= content_for(:after_js) do %>
 
 <script>
       google.charts.load('current', {packages: ['corechart', 'bar']});
@@ -93,3 +95,5 @@ function drawBasic() {
       chart.draw(data, options);
     }
 </script>
+
+<% end %>
