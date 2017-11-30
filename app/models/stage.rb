@@ -8,7 +8,7 @@ default_scope { order('stage_no ASC') }
   def compute_distance
     return nil unless start_point && end_point
 
-    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
     routes = gmaps.directions(start_point.address, end_point.address,
     mode: 'bicycling',
     alternatives: false)
