@@ -13,6 +13,15 @@ hr {
   top: 0;
 }
 
+#clickChangeAddress {
+  padding: 10px;
+  
+}
+
+#clickChangeAddress:hover {
+  background: $gray;
+}
+
 .map {
   height: 80vh;
 
