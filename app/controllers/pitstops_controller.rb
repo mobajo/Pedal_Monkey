@@ -23,6 +23,7 @@ class PitstopsController < ApplicationController
     pitstop = Pitstop.find(params[:id])
     if pitstop.update(pitstop_params)
     #find_places(@pitstop.latitude, @pitstop.longitude)
+    stage.compute_distance
     redirect_to trip_stage_path(trip, stage)
     else
      render :new
