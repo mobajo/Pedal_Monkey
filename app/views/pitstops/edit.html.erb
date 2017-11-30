@@ -1,25 +1,25 @@
 
 <script>
 
-    function myclick(event) {
-      document.getElementById("text").value = "whatever";
+    function update_address(address) {
+      document.getElementById("pitstop_address").value = address;
 
     };
 </script>
-<%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
-<%= f.text_field :address, class: "form-control", id: "text", name: "address" %>
+<%= form_for(:pitstop, url: trip_stage_pitstop_path, method: :patch) do |f| %>
+<%= f.hidden_field :id %>
+<%= f.text_field :address, class: "form-control" %>
 <%= f.submit class: "btn btn-danger" %>
 <% end %>
 
 <% hotel_no = 1 %>
 <% @hotels.each do |hotel| %>
-<div id="theclick" onclick="myclick(event);" style="cursor: pointer;">
+<div id="clickChangeAddress" onclick="update_address('<%= hotel[:vicinity] %>');" style="cursor: pointer;">
 
   <h4><%= hotel_no %>: <%= hotel[:name] %></h4>
   <% hotel_no += 1 %>
   <p><%= hotel[:vicinity] %></p>
   <p>Rating: <%= hotel[:rating] %></p>
-  
   
 </div>
 
