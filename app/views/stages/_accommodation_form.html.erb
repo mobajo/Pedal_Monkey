@@ -12,6 +12,7 @@
 <%= f.submit class: "btn btn-danger" %>
 <% end %>
 <br>
+<h4>Pick accommodation:</h4>
 <% hotel_no = 1 %>
 <% @hotels.each do |hotel| %>
 <div id="clickChangeAddress" onclick="update_address('<%= hotel[:vicinity] %>');" style="cursor: pointer;">
