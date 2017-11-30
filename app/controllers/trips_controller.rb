@@ -78,12 +78,19 @@ class TripsController < ApplicationController
       :sensor => :false,
       :mode => :bicycling
       }
-    directions = GoogleDirections.new(start_address, end_address, cycle_options)
+    #directions = GoogleDirections.new(start_address, end_address, cycle_options)
 
-    fail directions.status if directions.distance == 0
+   # fail directions.status if directions.distance == 0
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+    routes = gmaps.directions(
+    '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA',
+    '2400 Amphitheatre Parkway, Mountain View, CA 94043, USA',
+    mode: 'walking',
+    alternatives: false)
 
-    drive_time_in_minutes = directions.drive_time_in_minutes
-    distance_in_m = directions.distance.to_i
+
+    drive_time_in_minutes = routes[0][:legs][0][:duration][:value]
+    distance_in_m = routes[0][:legs][0][:distance][:value]
     xml = directions.xml
     @doc = Nokogiri::XML(xml)
 
@@ -102,12 +109,12 @@ class TripsController < ApplicationController
  pitstop = pitstops_distance[j];
 
 
- @doc.root.xpath("//step").each do |child|
+ routes[0][:legs][0][:steps].each do |step|
   break if j == pitstops_distance.count
-  totalmeters += child.xpath('distance//value').text.to_i
+  totalmeters += step[:distance][:value]
   #    array << child.xpath('distance//value').text.to_i
   if totalmeters > pitstop
-    step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
+    step_array << [step[:start_location][:lat], step[:start_location][:lat]]
     j += 1
     pitstop = pitstops_distance[j]
   end
