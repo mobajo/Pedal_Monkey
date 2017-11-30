@@ -11,7 +11,7 @@
 <%= f.text_field :address, class: "form-control" %>
 <%= f.submit class: "btn btn-danger" %>
 <% end %>
-
+<br>
 <% hotel_no = 1 %>
 <% @hotels.each do |hotel| %>
 <div id="clickChangeAddress" onclick="update_address('<%= hotel[:vicinity] %>');" style="cursor: pointer;">
@@ -19,28 +19,10 @@
   <h4><%= hotel_no %>: <%= hotel[:name] %></h4>
   <% hotel_no += 1 %>
   <p><%= hotel[:vicinity] %></p>
+  <p><%= rand(40...170) %> € a night</p>
   <p>Rating: <%= hotel[:rating] %></p>
   
 </div>
+<hr>
 
 <% end %>
-
-<!-- <button class="btn btn-danger" value=" hotel[:vicinity] " onclick="changeValue( hotel[:vicinity])">Select hotel</button> -->
-
-  <!-- <div>
-    <%= form_for([@trip, @pitstop.end_stage, @pitstop]) do |f| %>
-    <%= f.label :Address %>
-    <%= f.text_field :address %>
-    <%= f.submit %>
-    <% end %>
-  </div> -->
-
-  <%= content_for(:after_js) do %>
-
-  <script>
-   function changeValue(o){
-     document.getElementById('address').value=o.innerHTML;
-   }
- </script>
-
- <% end %>

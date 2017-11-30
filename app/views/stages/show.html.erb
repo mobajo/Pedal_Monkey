@@ -37,7 +37,7 @@
       <p>Price: <%= rand(400...1500) %> € a night | Rating: <%= @stage.end_point.rating %></p>
       <hr />
       <p><strong>Choose different accomodation:</strong></p>
-      ########### PUT GOOGLE PLACES LIST HERE #########
+        <%= render partial: "accommodation_form" %>
       <% end %>
     </div>
   </div>

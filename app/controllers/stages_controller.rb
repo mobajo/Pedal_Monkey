@@ -8,9 +8,9 @@ class StagesController < ApplicationController
     @stage = Stage.find(params[:id])
     @stages = @trip.stages
     @Elevation_samples = google_directions_elevation(@stage)
-
-    @pitstop = Pitstop.find(params[:id])
+    @pitstop = @stage.end_point
     @hotels = find_places(@pitstop.latitude, @pitstop.longitude)
+
 
  #    if @pitstop.update(pitstop_params)
  #    #find_places(@pitstop.latitude, @pitstop.longitude)
