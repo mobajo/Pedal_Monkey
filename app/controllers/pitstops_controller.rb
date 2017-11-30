@@ -20,11 +20,11 @@ class PitstopsController < ApplicationController
   def update
     trip = Trip.find(params[:trip_id])
     stage = Stage.find(params[:stage_id])
-    pitstop = Pitstop.find(params[:id])
+    pitstop = Pitstop.find(params[:pitstop][:id])
     if pitstop.update(pitstop_params)
-    #find_places(@pitstop.latitude, @pitstop.longitude)
-    stage.compute_distance
-    redirect_to trip_stage_path(trip, stage)
+      #find_places(@pitstop.latitude, @pitstop.longitude)
+      stage.compute_distance
+      redirect_to trip_stage_path(trip, stage)
     else
      render :new
     end
