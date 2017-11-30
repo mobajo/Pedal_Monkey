@@ -7,7 +7,7 @@ class Pitstop < ApplicationRecord
   after_validation :geocode, if: :address_changed?
 
   reverse_geocoded_by :latitude, :longitude
-  after_validation :fetch_address
+  after_validation :fetch_address, unless: :address_changed?
 
 
 

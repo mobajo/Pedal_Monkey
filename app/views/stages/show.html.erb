@@ -29,14 +29,14 @@
       <% if @stage.end_point.name.nil? %>
       <h4>Choose accommodation: </strong></h4>
 
-      ########### PUT GOOGLE PLACES LIST HERE #########
+      <%= render partial: "accommodation_form" %>
       <% else %>
 
       <h4><strong><%= @stage.end_point.name %></strong></h4>
       <p>Price: <%= rand(400...1500) %> € a night | Rating: <%= @stage.end_point.rating %></p>
       <hr />
       <p><strong>Choose different accomodation:</strong></p>
-      ########### PUT GOOGLE PLACES LIST HERE #########
+        <%= render partial: "accommodation_form" %>
       <% end %>
     </div>
   </div>
@@ -72,6 +72,7 @@
 <% destination_address = @stage.end_point.address %>
 
 <%= content_for(:after_js) do %>
+
 <script>
   google.charts.load('current', {packages: ['corechart', 'bar']});
   google.charts.setOnLoadCallback(drawBasic);

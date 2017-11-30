@@ -51,8 +51,8 @@
         </div>
         <% else %>
         <!-- Login link (when logged out) -->
-        <%= link_to t(".sign_in", default: "Log in"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info" %>
+        <%= link_to t(".sign_in", default: "Log in"), new_user_session_path, class: "navbar-wagon-link" %>
+        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info", style: "margin-left: 20px;" %>
         <% end %>
       </div>
     </div>
