@@ -80,7 +80,7 @@
 
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Label');
-    data.addColumn('number', 'Elevation in m');
+    data.addColumn('number', 'Meters');
 
     <% elevation_array = [] %>
     <% @Elevation_samples.each do |sample| %>
@@ -91,17 +91,28 @@
     data.addRows(<%= raw elevation_array %>);
 
     var options = {
-        chartArea: {
-      // leave room for y-axis labels
-      width: '94%'
+      bar: {
+    groupWidth: '100%'
     },
-      title: 'Elevation profile',
+        chartArea: {
+          left: '10%',
+          top: 19,
+          height: 150,
+      // leave room for y-axis labels
+      width: '87%'
+    },
       hAxis: {
         title: 'Stage distance',
+         textStyle: {
+            fontSize: 50, // or the number you want
+            italic: false,
+        },
       },
       vAxis: {
         title: 'Elevation in meters'
-      }, legend: 'none',
+      },
+      legend: 'top',
+      colors: ['#5CA886'],
     };
 
     var chart = new google.visualization.ColumnChart(
