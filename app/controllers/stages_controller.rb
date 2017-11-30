@@ -26,7 +26,7 @@ class StagesController < ApplicationController
   end
 
   def google_directions_elevation(stage)
-    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
 
     locations = [[stage.start_point.latitude, stage.start_point.longitude], [stage.end_point.latitude, stage.end_point.longitude]]
     results = gmaps.elevation_along_path(locations, 200)

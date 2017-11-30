@@ -23,7 +23,6 @@ class TripsController < ApplicationController
   trip_name = params[:name]
 
   step_array = google_directions_locations(start_address, end_address, start_date, end_date)
-
  #   test_array = []
  #
  #   @doc.root.xpath("//step//distance//value").children.each do |child|
@@ -46,11 +45,13 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip, step_array)
     Pitstop.pitstops_create_last(@trip, end_address)
+    #calculate stage distances
+    @trip.stages.each(&:compute_distance)
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
-    @trip.distance = google_directions_total_distance(start_address, end_address)
     @trip.title = trip_name
     @trip.save
+    @trip.update_distance
     @trip_member = TripMember.create(trip: @trip, user: current_user)
     if @trip.save
       redirect_to trip_path(@trip)
@@ -88,10 +89,11 @@ class TripsController < ApplicationController
     :language => :en,
       :alternative => :false,   #changed by rm from false
       :sensor => :false,
-      :mode => :bicycling
-    }
+      :mode => :bicycling,
+      }
     directions = GoogleDirections.new(start_address, end_address, cycle_options)
 
+#raise
     fail directions.status if directions.distance == 0
 
     drive_time_in_minutes = directions.drive_time_in_minutes
@@ -134,5 +136,29 @@ def google_directions_total_distance(start_address, end_address)
   trip_total_km = directions.distance.to_i / 1000
   return trip_total_km
 end
+
+def google_directions_waypoints(start_address, end_address)
+
+      waypts = [{
+      location: "Beitostølen, 2953, Norge",
+      stopover: true
+    }];
+
+
+     waypoint_options = {
+      :language => :en,
+      :alternative => :false,   #changed by rm from false
+      :sensor => :false,
+      :mode => :bicycling,
+      :waypoints => waypts
+      }
+    directions = GoogleDirections.new(start_address, end_address, waypoint_options)
+
+    fail directions.status if directions.distance == 0
+
+raise
+
+end
+
 
 end

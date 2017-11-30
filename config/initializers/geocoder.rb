@@ -23,3 +23,4 @@ Geocoder.configure(
   units: :km,                 # :km for kilometers or :mi for miles
   # distances: :linear          # :spherical or :linear
 )
+GOOGLE_MAPS_API_KEY = ENV['GOOGLE_API_SERVER_KEY']
