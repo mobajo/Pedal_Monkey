@@ -11,7 +11,10 @@ default_scope { order('stage_no ASC') }
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
     routes = gmaps.directions(start_point.address, end_point.address,
     mode: 'bicycling',
-    alternatives: false)
+    alternatives: false,
+    avoid: 'highways',
+    avoid: 'ferries'
+    )
 
     distance_in_m = routes[0][:legs][0][:distance][:value]
     self.distance = distance_in_m / 1000
