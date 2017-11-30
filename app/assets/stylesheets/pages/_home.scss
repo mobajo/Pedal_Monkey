@@ -161,7 +161,7 @@ body {
   box-shadow: 1px 1px 1px $gray-base;
   padding: 40px 15px 10px 20px;
   margin-bottom: 20px;
-  margin-top: 80px; // -80px for top-map
+  margin-top: 40px; // -80px for top-map
   text-align: left;
   h2 {
     font-size: 52px;
@@ -194,7 +194,7 @@ body {
   font-weight: bold;
 }
 
-.showafter { 
+.showafter {
  display: none;
 }
 .showhover:hover .showafter {
@@ -236,7 +236,7 @@ label {
 
 #spreadsheets {
   margin-top: 104px;
-  
+
 }
 
 .fade-in-banner {
@@ -277,11 +277,11 @@ label {
     left: 38%;
   }
 
-  .showafter { 
+  .showafter {
     display: block;
   }
 
-  .showbefore { 
+  .showbefore {
     display: none;
   }
 }
@@ -291,11 +291,11 @@ label {
     left: 21%;
   }
 
-  .showafter { 
+  .showafter {
     display: block;
   }
 
-  .showbefore { 
+  .showbefore {
     display: none;
   }
 }

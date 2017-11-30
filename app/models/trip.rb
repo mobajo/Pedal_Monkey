@@ -21,7 +21,7 @@ class Trip < ApplicationRecord
   end
 
   def update_distance
-    self.distance = self.stages.map(&:distance).reduce(:+)
+    self.distance = self.stages.map(&:distance).compact.reduce(:+)
     self.save
   end
 

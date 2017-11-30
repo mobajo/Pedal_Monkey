@@ -12,7 +12,6 @@ default_scope { order('stage_no ASC') }
       :alternative => :false,   #changed by rm from false
       :sensor => :false,
       :mode => :bicycling,
-      :key => "AIzaSyCybNCrrf2cgA8kqkijg4_j6yM_ldFvpAA"
       }
     directions = GoogleDirections.new(start_point.address, end_point.address, options)
     self.distance = directions.distance.to_i / 1000

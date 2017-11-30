@@ -76,7 +76,6 @@ class TripsController < ApplicationController
       :alternative => :false,   #changed by rm from false
       :sensor => :false,
       :mode => :bicycling,
-      :key => "AIzaSyCybNCrrf2cgA8kqkijg4_j6yM_ldFvpAA"
       }
     directions = GoogleDirections.new(start_address, end_address, cycle_options)
 
