@@ -23,7 +23,6 @@ class TripsController < ApplicationController
   trip_name = params[:name]
 
   step_array = google_directions_locations(start_address, end_address, start_date, end_date)
-
  #   test_array = []
  #
  #   @doc.root.xpath("//step//distance//value").children.each do |child|
@@ -46,11 +45,13 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip, step_array)
     Pitstop.pitstops_create_last(@trip, end_address)
+    #calculate stage distances
+    @trip.stages.each(&:compute_distance)
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
-    @trip.distance = google_directions_total_distance(start_address, end_address)
     @trip.title = trip_name
     @trip.save
+    @trip.update_distance
     @trip_member = TripMember.create(trip: @trip, user: current_user)
     if @trip.save
       redirect_to trip_path(@trip)
@@ -63,13 +64,25 @@ class TripsController < ApplicationController
   end
 
   def update
+    @trip = Trip.find(params[:id])
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    else
+      render :new
+    end
   end
 
   def destroy
+    @trip = Trip.find(params[:id])
+    @trip.destroy
+    redirect_to dashboard_path
   end
 
   private
 
+  def trip_params
+    params.require(:trip).permit(:title, :start_date, :end_date, :start_address, :end_address, :distance)
+  end
 
   def google_directions_locations(start_address, end_address, start_date, end_date)
      #cycle_options = {
@@ -90,6 +103,7 @@ class TripsController < ApplicationController
     drive_time_in_minutes = routes[0][:legs][0][:steps][0][:duration][:value]
     distance_in_m = routes[0][:legs][0][:steps][0][:distance][:value]
 raise
+
     xml = directions.xml
     @doc = Nokogiri::XML(xml)
 
@@ -105,13 +119,14 @@ raise
     j = 0
    # array = []
 
+
  pitstop = pitstops_distance[j];
 routes[0][:legs][0][:steps][0][:distance][:value]
 
  routes[0][:legs][0][:steps].each do |step|
   break if j == pitstops_distance.count
   totalmeters += step[:distance][:value]
-  #    array << child.xpath('distance//value').text.to_i
+
   if totalmeters > pitstop
     step_array << [step[:start_location][:lat], step[:start_location][:lng]]
     j += 1
@@ -131,5 +146,29 @@ def google_directions_total_distance(start_address, end_address)
   trip_total_km = routes[0][:legs][0][:steps][0][:distance][:value] / 1000
   return trip_total_km
 end
+
+def google_directions_waypoints(start_address, end_address)
+
+      waypts = [{
+      location: "Beitostølen, 2953, Norge",
+      stopover: true
+    }];
+
+
+     waypoint_options = {
+      :language => :en,
+      :alternative => :false,   #changed by rm from false
+      :sensor => :false,
+      :mode => :bicycling,
+      :waypoints => waypts
+      }
+    directions = GoogleDirections.new(start_address, end_address, waypoint_options)
+
+    fail directions.status if directions.distance == 0
+
+raise
+
+end
+
 
 end

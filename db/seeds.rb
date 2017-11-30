@@ -56,7 +56,7 @@ user4 = User.new(
   first_name: "Peter",
   last_name: "Hornsby",
   password: "123456",
-  description: "Cycled around the work in 500 days")
+  description: "Cycled around the world in 500 days")
 user4.save
 user4.photo_url = url
 
@@ -126,7 +126,7 @@ puts '3 stages created'
 
 pitstop1 = Pitstop.new(
   name: 'starting point',
-  address: 'Manchester',
+  address: 'Manchester, UK',
   price: 0,
   rating: 5,
   start_stage: stage1,
@@ -135,7 +135,7 @@ pitstop1 = Pitstop.new(
 
 pitstop2 = Pitstop.new(
   name: 'Shrewsbury Central Inn',
-  address: 'Shrewsbury',
+  address: 'Shrewsbury, UK',
   price: 200,
   rating: 4,
   end_stage: stage1,
@@ -145,7 +145,7 @@ pitstop2 = Pitstop.new(
 
 
 pitstop3 = Pitstop.new(
-  name: 'last night',
+  name: 'Hereford YMCA',
   address: 'Hereford',
   price: 0,
   rating: 5,
@@ -156,7 +156,6 @@ pitstop3 = Pitstop.new(
 
 
 pitstop4 = Pitstop.new(
-  name: 'End point',
   address: 'Bristol',
   price: 0,
   rating: 5,

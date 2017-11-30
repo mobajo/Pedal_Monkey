@@ -1,3 +1,9 @@
+<% if @trip.title.nil? %>
+  <%= content_for(:title, "Your trip | PedalMonkey") %>
+<% else %>
+  <%= content_for(:title, "Stage " + @stage.stage_no.to_s + ": " + @trip.title + " | PedalMonkey") %>
+<% end %>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div class="container">
