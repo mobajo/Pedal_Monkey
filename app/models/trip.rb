@@ -1,5 +1,5 @@
 class Trip < ApplicationRecord
-	has_many :trip_members
+	has_many :trip_members, dependent: :destroy
 	has_many :stages, dependent: :destroy
 
   def find_stage(num)
@@ -18,6 +18,11 @@ class Trip < ApplicationRecord
         )
     end
 
+  end
+
+  def update_distance
+    self.distance = self.stages.map(&:distance).reduce(:+)
+    self.save
   end
 
 end

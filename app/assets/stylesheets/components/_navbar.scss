@@ -1,6 +1,7 @@
 /* Main navbar */
 .navbar-wagon h2 {
   color: white;
+  margin-top: 7px;
 }
 
 .navbar-wagon {
@@ -50,12 +51,17 @@
 /* Navbar link */
 .navbar-wagon-link {
   color: white;
-  font-size: 14px;
+  font-size: 18px;
   text-align: right;
+  font-family: Dosis;
+  border-bottom: 3px solid;
+  border-color: $brand-success;
+  font-weight: bold;
 }
 .navbar-wagon-link:hover {
   color: white;
-  text-decoration: underline;
+  border-color: $brand-info;
+  text-decoration: none;
 }
 
 /* Dropdown menu */
