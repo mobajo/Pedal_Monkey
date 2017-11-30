@@ -72,18 +72,24 @@ class TripsController < ApplicationController
 
 
   def google_directions_locations(start_address, end_address, start_date, end_date)
-     cycle_options = {
-      :language => :en,
-      :alternative => :false,   #changed by rm from false
-      :sensor => :false,
-      :mode => :bicycling
-      }
-    directions = GoogleDirections.new(start_address, end_address, cycle_options)
+     #cycle_options = {
+     # :language => :en,
+     # :alternative => :false,   #changed by rm from false
+     # :sensor => :false,
+     # :mode => :bicycling
+     # }
+    # directions = GoogleDirections.new(start_address, end_address, cycle_options)
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+    routes = gmaps.directions(start_address, end_address,
+    mode: 'bicycling',
+    alternatives: false)
 
-    fail directions.status if directions.distance == 0
 
-    drive_time_in_minutes = directions.drive_time_in_minutes
+    #fail directions.status if directions.distance == 0
+
+    drive_time_in_minutes = routes.duration.value
     distance_in_m = directions.distance.to_i
+raise
     xml = directions.xml
     @doc = Nokogiri::XML(xml)
 
