@@ -186,15 +186,15 @@
       destination:        '<%= destination_address %>',
       waypoints:          waypts,
       optimizeWaypoints:  true,
-      travelMode:         google.maps.TravelMode.BICYCLING
-
+      travelMode:         google.maps.TravelMode.BICYCLING,
+      avoidHighways: true
     };
 
     var request = {
       origin:             '<%= start_address %>',
       destination:        '<%= destination_address %>',
-      travelMode:         google.maps.TravelMode.BICYCLING
-
+      travelMode:         google.maps.TravelMode.BICYCLING,
+      avoidHighways: true
     };
     requestSelector = "placeholder"
 

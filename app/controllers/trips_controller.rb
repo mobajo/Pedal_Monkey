@@ -94,9 +94,14 @@ class TripsController < ApplicationController
      # }
     # directions = GoogleDirections.new(start_address, end_address, cycle_options)
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
-    routes = gmaps.directions(start_address, end_address,
+    routes = gmaps.directions(
+      start_address,
+      end_address,
       mode: 'bicycling',
-      alternatives: false)
+      alternatives: false,
+      avoid: 'highways',
+      avoid: 'ferries'
+      )
 
 
     drive_time_in_minutes = routes[0][:legs][0][:duration][:value]
@@ -136,7 +141,10 @@ class TripsController < ApplicationController
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
     routes = gmaps.directions(start_address, end_address,
       mode: 'bicycling',
-      alternatives: false)
+      alternatives: false,
+      avoid: 'highways',
+      avoid: 'ferries'
+      )
     trip_total_km = routes[0][:legs][0][:steps][0][:distance][:value] / 1000
     return trip_total_km
   end
