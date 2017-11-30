@@ -95,15 +95,13 @@ class TripsController < ApplicationController
     # directions = GoogleDirections.new(start_address, end_address, cycle_options)
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
     routes = gmaps.directions(start_address, end_address,
-    mode: 'bicycling',
-    alternatives: false)
+      mode: 'bicycling',
+      alternatives: false)
 
 
     drive_time_in_minutes = routes[0][:legs][0][:duration][:value]
     distance_in_m = routes[0][:legs][0][:distance][:value]
 
-    xml = directions.xml
-    @doc = Nokogiri::XML(xml)
 
     number_of_days = (end_date.to_date - start_date.to_date).to_i + 1
     total_trip_distance = distance_in_m
@@ -118,53 +116,29 @@ class TripsController < ApplicationController
    # array = []
 
 
- pitstop = pitstops_distance[j];
+   pitstop = pitstops_distance[j];
 
- routes[0][:legs][0][:steps].each do |step|
-  break if j == pitstops_distance.count
-  totalmeters += step[:distance][:value]
-  if totalmeters > pitstop
-    step_array << [step[:start_location][:lat], step[:start_location][:lng]]
-    j += 1
-    pitstop = pitstops_distance[j]
+  routes[0][:legs][0][:steps].each do |step|
+    break if j == pitstops_distance.count
+    totalmeters += step[:distance][:value]
+    if totalmeters > pitstop
+      step_array << [step[:start_location][:lat], step[:start_location][:lng]]
+      j += 1
+      pitstop = pitstops_distance[j]
+    end
   end
-end
 
-return step_array
-end
+  return step_array
+  end
 
 
-def google_directions_total_distance(start_address, end_address)
-  gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+  def google_directions_total_distance(start_address, end_address)
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
     routes = gmaps.directions(start_address, end_address,
-    mode: 'bicycling',
-    alternatives: false)
-  trip_total_km = routes[0][:legs][0][:steps][0][:distance][:value] / 1000
-  return trip_total_km
-end
-
-def google_directions_waypoints(start_address, end_address)
-
-      waypts = [{
-      location: "Beitostølen, 2953, Norge",
-      stopover: true
-    }];
-
-
-     waypoint_options = {
-      :language => :en,
-      :alternative => :false,   #changed by rm from false
-      :sensor => :false,
-      :mode => :bicycling,
-      :waypoints => waypts
-      }
-    directions = GoogleDirections.new(start_address, end_address, waypoint_options)
-
-    fail directions.status if directions.distance == 0
-
-raise
-
-end
-
+      mode: 'bicycling',
+      alternatives: false)
+    trip_total_km = routes[0][:legs][0][:steps][0][:distance][:value] / 1000
+    return trip_total_km
+  end
 
 end
