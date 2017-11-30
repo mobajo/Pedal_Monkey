@@ -10,10 +10,6 @@ class Pitstop < ApplicationRecord
   after_validation :fetch_address
 
 
-  def calculate_stage_distances
-    start_stage.compute_distance if start_stage
-    end_stage.compute_distance if end_stage
-  end
 
   def final_stop?
     self.end_stage ? self.end_stage.trip.stages.count == self.end_stage.stage_no : false
@@ -63,8 +59,6 @@ class Pitstop < ApplicationRecord
       pitstop.longitude = step[1]
       pitstop.save
     end
-      trip.stages.each(&:compute_distance)
-      trip.update_distance
   end
 
   def self.pitstops_create_last(trip, end_address)

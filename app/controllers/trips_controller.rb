@@ -45,6 +45,8 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip, step_array)
     Pitstop.pitstops_create_last(@trip, end_address)
+    #calculate stage distances
+    @trip.stages.each(&:compute_distance)
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
     @trip.title = trip_name
