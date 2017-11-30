@@ -23,7 +23,6 @@ class TripsController < ApplicationController
   trip_name = params[:name]
 
   step_array = google_directions_locations(start_address, end_address, start_date, end_date)
-
  #   test_array = []
  #
  #   @doc.root.xpath("//step//distance//value").children.each do |child|
@@ -46,11 +45,13 @@ class TripsController < ApplicationController
     Pitstop.pitstops_create_first(@trip.stages.first, start_address)
     Pitstop.pitstops_create_rest(@trip, step_array)
     Pitstop.pitstops_create_last(@trip, end_address)
+    #calculate stage distances
+    @trip.stages.each(&:compute_distance)
 
     # SAVE AND RENDER THE TRIP IF NO ERRORS
-    @trip.distance = google_directions_total_distance(start_address, end_address)
     @trip.title = trip_name
     @trip.save
+    @trip.update_distance
     @trip_member = TripMember.create(trip: @trip, user: current_user)
     if @trip.save
       redirect_to trip_path(@trip)
@@ -84,20 +85,23 @@ class TripsController < ApplicationController
   end
 
   def google_directions_locations(start_address, end_address, start_date, end_date)
-   cycle_options = {
-    :language => :en,
-      :alternative => :false,   #changed by rm from false
-      :sensor => :false,
-      :mode => :bicycling
-    }
-    directions = GoogleDirections.new(start_address, end_address, cycle_options)
 
-    fail directions.status if directions.distance == 0
+     #cycle_options = {
+     # :language => :en,
+     # :alternative => :false,   #changed by rm from false
+     # :sensor => :false,
+     # :mode => :bicycling
+     # }
+    # directions = GoogleDirections.new(start_address, end_address, cycle_options)
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+    routes = gmaps.directions(start_address, end_address,
+      mode: 'bicycling',
+      alternatives: false)
 
-    drive_time_in_minutes = directions.drive_time_in_minutes
-    distance_in_m = directions.distance.to_i
-    xml = directions.xml
-    @doc = Nokogiri::XML(xml)
+
+    drive_time_in_minutes = routes[0][:legs][0][:duration][:value]
+    distance_in_m = routes[0][:legs][0][:distance][:value]
+
 
     number_of_days = (end_date.to_date - start_date.to_date).to_i + 1
     total_trip_distance = distance_in_m
@@ -111,28 +115,30 @@ class TripsController < ApplicationController
     j = 0
    # array = []
 
+
    pitstop = pitstops_distance[j];
 
-
-   @doc.root.xpath("//step").each do |child|
+  routes[0][:legs][0][:steps].each do |step|
     break if j == pitstops_distance.count
-    totalmeters += child.xpath('distance//value').text.to_i
-  #    array << child.xpath('distance//value').text.to_i
-  if totalmeters > pitstop
-    step_array << [child.xpath('start_location//lat').text.to_f, child.xpath('start_location//lng').text.to_f]
-    j += 1
-    pitstop = pitstops_distance[j]
+    totalmeters += step[:distance][:value]
+    if totalmeters > pitstop
+      step_array << [step[:start_location][:lat], step[:start_location][:lng]]
+      j += 1
+      pitstop = pitstops_distance[j]
+    end
   end
-end
 
-return step_array
-end
+  return step_array
+  end
 
 
-def google_directions_total_distance(start_address, end_address)
-  directions = GoogleDirections.new(start_address, end_address)
-  trip_total_km = directions.distance.to_i / 1000
-  return trip_total_km
-end
+  def google_directions_total_distance(start_address, end_address)
+    gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_SERVER_KEY'])
+    routes = gmaps.directions(start_address, end_address,
+      mode: 'bicycling',
+      alternatives: false)
+    trip_total_km = routes[0][:legs][0][:steps][0][:distance][:value] / 1000
+    return trip_total_km
+  end
 
 end
