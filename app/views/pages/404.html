@@ -84,7 +84,6 @@
     box-shadow: 0 0 20px rgba(0,0,0,.2);
     padding:50px;
     background-color: #fff;
-    opacity: 0.8;
     width:100%;
     max-width:525px;
     position:absolute;
@@ -315,28 +314,27 @@
 
   </head>
   <body class="background error-page-wrapper background-color background-image">
-
-<div class="content-container shadow">
-  <div class="head-line secondary-text-color">
-    503
+    <center>
+  <div class="content-container shadow">
+    <div class="head-line secondary-text-color">
+      404
+    </div>
+    <div class="subheader primary-text-color">
+      Oops, the page you're looking for does not exist.
+    </div>
+    <div class="hr"></div>
+    <div class="context secondary-text-color">
+      <p>
+        You may want to head back to the homepage.
+        If you think something is broken, report a problem.
+      </p>
+    </div>
+    <div class="buttons-container">
+      <a class="button" href="https://www.pedalmonkey.world" target="_blank"><span class="fa fa-home"></span> Go To Homepage</a>
+      <a class="button" href="mailto:Hello@pedalmonkey.com" target="_blank"><span class="fa fa-warning"></span> Report A Problem</a>
+    </div>
   </div>
-  <div class="subheader primary-text-color">
-    Looks like we're having some server issues.
-  </div>
-  <div class="hr"></div>
-  <div class="context secondary-text-color">
-
-    <p>
-      Go back to the previous page and try again.
-      If you think something is broken, report a problem.
-    </p>
-
-
-  </div>
-  <div class="buttons-container single-button">
-    <a class="button" href="mailto:Hello@pedalmonkey.com" target="_blank"><span class="fa fa-warning"></span> Report A Problem</a>
-  </div>
-</div>
+</center>
 
 
     <script>
@@ -443,7 +441,7 @@
        });
 
      };
-     var ep = new ErrorPage('body', "503", "background");
+     var ep = new ErrorPage('body', "404", "background");
      ep.initialize();
 
      // hack to make sure content stays centered >_<
@@ -456,3 +454,4 @@
 
   </body>
 </html>
+
