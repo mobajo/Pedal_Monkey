@@ -70,220 +70,134 @@
      }
     </style>
     <style>
-  body.background.error-page-wrapper, .background.error-page-wrapper.preview {
+  .plain.error-page-wrapper {
     font-family: 'Source Sans Pro', sans-serif;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:cover;
+    background-color:#6355bc;
+    padding:0 5%;
     position:relative;
   }
 
-  .background.error-page-wrapper .content-container {
-    border-radius: 6px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
-    padding:50px;
-    background-color: #fff;
-    opacity: 0.8;
-    width:100%;
-    max-width:525px;
-    position:absolute;
-    left:50%;
-    margin-left:-262px;
+  .plain.error-page-wrapper .content-container {
+    -webkit-transition: left .5s ease-out, opacity .5s ease-out;
+    -moz-transition: left .5s ease-out, opacity .5s ease-out;
+    -ms-transition: left .5s ease-out, opacity .5s ease-out;
+    -o-transition: left .5s ease-out, opacity .5s ease-out;
+    transition: left .5s ease-out, opacity .5s ease-out;
+    max-width:400px;
+    position:relative;
+    left:-30px;
+    opacity:0;
   }
 
-  .background.error-page-wrapper .content-container.in {
-    left:0px;
+  .plain.error-page-wrapper .content-container.in {
+    left: 0px;
     opacity:1;
   }
 
-  .background.error-page-wrapper .head-line {
-    transition:color .2s linear;
+  .plain.error-page-wrapper .head-line {
+    transition: color .2s linear;
     font-size:48px;
     line-height:60px;
+    color:rgba(255,255,255,.2);
     letter-spacing: -1px;
     margin-bottom: 5px;
-    color:#ccc;
   }
-  .background.error-page-wrapper .subheader {
-    transition:color .2s linear;
+  .plain.error-page-wrapper .subheader {
+    transition: color .2s linear;
     font-size:36px;
     line-height:46px;
-    color:#333;
+    color:#fff;
+    padding-bottom: 10px;
   }
-  .background.error-page-wrapper .hr {
+  .plain.error-page-wrapper hr {
     height:1px;
-    background-color: #ddd;
-    width:60%;
-    max-width:250px;
-    margin:35px auto;
+    background-color: rgba(255,255,255,.2);
+    border:none;
+    width:250px;
+    margin:10px 0;
   }
-  .background.error-page-wrapper .context {
-    transition:color .2s linear;
+  .plain.error-page-wrapper .context {
+    transition: color .2s linear;
     font-size:18px;
     line-height:27px;
-    color:#bbb;
+    color:#fff;
   }
-  .background.error-page-wrapper .context p {
+  .plain.error-page-wrapper .context p {
     margin:0;
   }
-  .background.error-page-wrapper .context p:nth-child(n+2) {
-    margin-top:16px;
+  .plain.error-page-wrapper .context p:nth-child(n+2) {
+    margin-top:12px;
   }
-  .background.error-page-wrapper .buttons-container {
-    margin-top: 35px;
+  .plain.error-page-wrapper .buttons-container {
+    margin-top: 15px;
     overflow: hidden;
   }
-  .background.error-page-wrapper .buttons-container a {
-    transition:text-indent .2s ease-out, color .2s linear, background-color .2s linear;
-    text-indent: 0px;
+  .plain.error-page-wrapper .buttons-container a {
+    transition: color .2s linear, border-color .2s linear;
     font-size:14px;
     text-transform: uppercase;
     text-decoration: none;
     color:#fff;
-    background-color:#2ecc71;
+    border:2px solid white;
     border-radius: 99px;
-    padding:12px 0 13px;
-    text-align: center;
-    display:inline-block;
-    overflow: hidden;
-    position: relative;
-    width:45%;
-  }
-
-  .background.error-page-wrapper .buttons-container .fa {
-    transition:left .2s ease-out;
-    position: absolute;
-    left:-50px;
-  }
-
-  .background.error-page-wrapper .buttons-container a:hover {
-    text-indent: 15px;
-  }
-
-  .background.error-page-wrapper .buttons-container a:nth-child(1) {
+    padding:8px 30px 9px;
+    display: inline-block;
     float:left;
   }
-
-  .background.error-page-wrapper .buttons-container a:nth-child(2) {
-    float:right;
+  .plain.error-page-wrapper .buttons-container a:hover {
+    background-color:rgba(255,255,255,.05);
+  }
+  .plain.error-page-wrapper .buttons-container a:first-child {
+    margin-right:25px;
   }
 
-  .background.error-page-wrapper .buttons-container .fa-home {
-    font-size:18px;
-    top:15px;
-  }
-
-  .background.error-page-wrapper .buttons-container a:hover .fa-home {
-    left:10px;
-  }
-
-  .background.error-page-wrapper .buttons-container .fa-warning {
-    font-size:16px;
-    top:17px;
-  }
-
-  .background.error-page-wrapper .buttons-container a:hover .fa-warning {
-    left:5px;
-  }
-
-  .background.error-page-wrapper .buttons-container .fa-power-off {
-    font-size:16px;
-    top:17px;
-  }
-
-  .background.error-page-wrapper .buttons-container a:hover .fa-power-off {
-    left:9px;
-  }
-
-
-  .background.error-page-wrapper .buttons-container.single-button {
-    text-align: center;
-  }
-
-  .background.error-page-wrapper .buttons-container.single-button a  {
-    float:none !important;
-  }
-
-  @media screen and (max-width: 555px) {
-    .background.error-page-wrapper {
-      padding:30px 5%;
-    }
-    .background.error-page-wrapper .content-container {
-      padding:37px;
-      position: static;
-      left: 0;
-      margin-left:0;
-    }
-    .background.error-page-wrapper .head-line {
+  @media screen and (max-width: 485px) {
+    .plain.error-page-wrapper .header {
       font-size:36px;
-    }
-    .background.error-page-wrapper .subheader {
+     }
+    .plain.error-page-wrapper .subheader {
       font-size:27px;
-      line-height: 37px;
-    }
-    .background.error-page-wrapper .hr {
-      margin:30px auto;
-      width:215px;
-    }
-    .background.error-page-wrapper .buttons-container .fa {
-      display:none;
-    }
-    .background.error-page-wrapper .buttons-container a:hover {
-      text-indent: 0px;
-    }
-  }
+      line-height:38px;
+      padding-bottom: 15px;
+     }
+    .plain.error-page-wrapper hr {
+      width:185px;
+      margin:25px 0;
+     }
 
-  @media screen and (max-width: 450px) {
-    .background.error-page-wrapper {
-      padding:30px;
-    }
-    .background.error-page-wrapper .head-line {
-      font-size:32px;
-    }
-    .background.error-page-wrapper .hr {
-      margin:25px auto;
-      width:180px;
-    }
-    .background.error-page-wrapper .context {
-      font-size:15px;
-      line-height:22px;
+    .plain.error-page-wrapper .context {
+      font-size:16px;
+      line-height: 24px;
+     }
+    .plain.error-page-wrapper .buttons-container {
+      margin-top:35px;
     }
 
-    .background.error-page-wrapper .context p:nth-child(n+2) {
-      margin-top:10px;
-    }
-    .background.error-page-wrapper .buttons-container {
-      margin-top:29px;
-    }
-    .background.error-page-wrapper .buttons-container a {
-      float:none !important;
-      width:65%;
-      margin:0 auto;
+    .plain.error-page-wrapper .buttons-container a {
       font-size:13px;
-      padding:9px 0;
+      padding:8px 0 7px;
+      width:45%;
+      text-align: center;
     }
-
-    .background.error-page-wrapper .buttons-container a:nth-child(2) {
-      margin-top:12px;
+    .plain.error-page-wrapper .buttons-container a:first-child {
+      margin-right:10%;
     }
   }
 </style>
 
     <style>
 
-
-    .background-image {
-      background-color: #FFFFFF;
-      background-image: url(http://res.cloudinary.com/do3bxhr7b/image/upload/v1512059533/7136980641_412937c298_k_uxsb7i.jpg) !important;
+    .background-color {
+      background-color: rgba(92, 168, 134, 1) !important;
     }
 
+
     .primary-text-color {
-      color: #494949 !important;
+      color: #FFFFFF !important;
     }
 
     .secondary-text-color {
-      color: rgba(185, 185, 185, 1) !important;
+      color: rgba(255, 170, 64, 1) !important;
     }
 
     .sign-text-color {
@@ -299,32 +213,35 @@
     }
 
     .border-button {
-      color: rgba(92, 168, 134, 1) !important;
-      border-color: rgba(92, 168, 134, 1) !important;
+      color: #FFFFFF !important;
+      border-color: #FFFFFF !important;
     }
     .button {
-      background-color: rgba(92, 168, 134, 1) !important;
+      background-color: #FFFFFF !important;
       color: #FFFFFF !important;
     }
 
     .shadow {
-      box-shadow: 0 0 24px #000000;
+      box-shadow: 0 0 60px #000000;
     }
 
 </style>
 
   </head>
-  <body class="background error-page-wrapper background-color background-image">
-
-<div class="content-container shadow">
+  <body class="plain error-page-wrapper background-color background-image">
+    <div class="content-container">
   <div class="head-line secondary-text-color">
-    503
+    500
   </div>
   <div class="subheader primary-text-color">
-    Looks like we're having some server issues.
+    Looks like we're having <br>
+    some server issues.
   </div>
-  <div class="hr"></div>
-  <div class="context secondary-text-color">
+  <iframe class="video" width="500" height="420" src="https://www.youtube.com/embed/DFzteK_y1b4?autoplay=1&amp;rel=0&amp;controls=0&amp;showinfo=0&amp;start=48" frameborder="0" allowfullscreen></iframe>
+  <hr>
+    <hr>
+    <div class="clearfix"></div>
+    <div class="context primary-text-color">
 
     <p>
       Go back to the previous page and try again.
@@ -332,9 +249,9 @@
     </p>
 
 
-  </div>
-  <div class="buttons-container single-button">
-    <a class="button" href="mailto:Hello@pedalmonkey.com" target="_blank"><span class="fa fa-warning"></span> Report A Problem</a>
+    </div>
+  <div class="buttons-container">
+    <a class="border-button" href="mailto:Hello@pedalmonkey.com" target="_blank">Report A Problem</a>
   </div>
 </div>
 
@@ -443,7 +360,7 @@
        });
 
      };
-     var ep = new ErrorPage('body', "503", "background");
+     var ep = new ErrorPage('body', "503", "plain");
      ep.initialize();
 
      // hack to make sure content stays centered >_<
