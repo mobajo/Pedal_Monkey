@@ -83,6 +83,8 @@
           <p><%= stage.start_point.address %></p>
           <p><strong>Stage finish:</strong></p>
           <p><%= stage.end_point.address %></p>
+          <p><strong>Stage distance:</strong></p>
+          <p><%= stage.distance.round(1) %> Kilometers</p>
           <p class="text-right">
             <%= link_to trip_stage_path(@trip, stage.id) do %>
             Go to stage <strong><i class="fa fa-arrow-right" aria-hidden="true"></i></strong>

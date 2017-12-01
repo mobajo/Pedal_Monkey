@@ -104,6 +104,22 @@ body {
   }
 }
 
+.content-box-elevation {
+ // height: 200px;
+  background-color: white;
+  box-shadow: 1px 1px 1px $gray-base;
+  padding: 50px 15px 10px 20px;
+  margin-bottom: 20px;
+  margin-top: 70px;
+  text-align: left;
+  p {
+    margin: 0px 0 5px;
+  }
+  i {
+    color: black;
+  }
+}
+
 .content-box-center {
   background-color: white;
   box-shadow: 1px 1px 1px $gray-base;
@@ -322,3 +338,7 @@ label {
           float: none;
           width: auto;
         }
+
+#chart_div {
+  height: 148px;
+}
