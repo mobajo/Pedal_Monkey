@@ -17,7 +17,7 @@ default_scope { order('stage_no ASC') }
     )
 
     distance_in_m = routes[0][:legs][0][:distance][:value]
-    self.distance = distance_in_m / 1000
+    self.distance = distance_in_m / 1000.to_f
     puts self.distance
     self.save
 
