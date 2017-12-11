@@ -71,8 +71,17 @@ user5 = User.new(
 user5.save
 user5.photo_url = url
 
-
-puts '5 users created'
+url = "http://moziru.com/images/profile-clipart-generic-user-7.png"
+user6 = User.new(
+  username: "Guest",
+  email: "guest@pedalmonkey.world",
+  first_name: "Guest",
+  last_name: "Visitor",
+  password: "123456",
+  description: "Just having a look around")
+user6.save
+user6.photo_url = url
+puts '6 users created'
 
 trip1 = Trip.new(
   title: "Manchester to Bristol",
