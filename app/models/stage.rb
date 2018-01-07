@@ -3,17 +3,17 @@ class Stage < ApplicationRecord
   has_one :start_point, class_name: "Pitstop", foreign_key: "start_stage_id", dependent: :destroy
   has_one :end_point, class_name: "Pitstop", foreign_key: "end_stage_id", dependent: :destroy
 
-default_scope { order('stage_no ASC') }
+default_scope { order("stage_no ASC") }
 
   def compute_distance
     return nil unless start_point && end_point
 
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
-    routes = gmaps.directions(start_point.address, end_point.address,
-    mode: 'bicycling',
+    routes = gmaps.directions((origin=start_point.latitude,start_point.longitude), (destination=end_point.latitude,end_point.longitude),
+    mode: "bicycling",
     alternatives: false,
-    avoid: 'highways',
-    avoid: 'ferries'
+    avoid: "highways",
+    avoid: "ferries"
     )
 
     distance_in_m = routes[0][:legs][0][:distance][:value]

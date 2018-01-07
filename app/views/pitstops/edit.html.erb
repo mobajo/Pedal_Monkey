@@ -14,13 +14,13 @@
 
 <% hotel_no = 1 %>
 <% @hotels.each do |hotel| %>
-<div id="clickChangeAddress" onclick="update_address('<%= hotel[:vicinity] %>');" style="cursor: pointer;">
+<div id="clickChangeAddress" onclick="update_address("<%= hotel[:vicinity] %>");" style="cursor: pointer;">
 
   <h4><%= hotel_no %>: <%= hotel[:name] %></h4>
   <% hotel_no += 1 %>
   <p><%= hotel[:vicinity] %></p>
   <p>Rating: <%= hotel[:rating] %></p>
-  
+
 </div>
 
 <% end %>
@@ -39,7 +39,7 @@
 
   <script>
    function changeValue(o){
-     document.getElementById('address').value=o.innerHTML;
+     document.getElementById("address").value=o.innerHTML;
    }
  </script>
 
