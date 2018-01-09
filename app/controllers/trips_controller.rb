@@ -97,10 +97,10 @@ class TripsController < ApplicationController
     routes = gmaps.directions(
       start_address,
       end_address,
-      mode: 'bicycling',
+      mode: "bicycling",
       alternatives: false,
-      avoid: 'highways',
-      avoid: 'ferries'
+      avoid: "highways",
+      avoid: "ferries"
       )
 
 

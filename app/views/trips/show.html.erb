@@ -167,11 +167,15 @@
 
   function calcRoute() {
     /* This code iterates over each stage of a user trip and sets the waypoint(s) as the end_point address as defined by the user */
+    /*end_stage.address changed to lat.long and parseFloat so when the address is an unanamed road it will show on the map.  */
 
     var waypts = [];
     <% @trip.stages.each do |stage|  %>
+    var userLat = parseFloat("<%= raw stage.end_point.latitude %>")
+    var userLng = parseFloat("<%= raw stage.end_point.longitude %>")
+    var endPointAsCoodinates = { lat: userLat, lng:userLng};
     <% break if stage.end_point.final_stop? %>
-    var stop = '<%= raw stage.end_point.address %>'
+    var stop = endPointAsCoodinates;
     waypts.push({
       location: stop,
       stopover: true,
