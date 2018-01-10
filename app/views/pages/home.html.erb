@@ -23,16 +23,12 @@
         </div>
       </div>
       <div class="form-group col-xs-12 col-md-6">
-      <!-- div class="text-left">
-      </div> -->
       <div class="text-left">
         <%= label_tag(:start_date, "") %>
         <%= date_field_tag(:start_date, Date.today, class: "form-control") %>
       </div>
     </div>
     <div class="form-group col-xs-12 col-md-6">
-      <!-- <div class="text-left">
-      </div> -->
       <div class="text-left">
         <%= label_tag(:end_date, "") %>
         <%= date_field_tag(:end_date, Date.today + 1, class: "form-control") %>
