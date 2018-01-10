@@ -21,7 +21,7 @@ default_scope { order("stage_no ASC") }
     puts self.distance
     self.save
 
-#    fail directions.status if directions.distance == 0
+
   end
 
 end

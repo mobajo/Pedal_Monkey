@@ -10,14 +10,6 @@ class StagesController < ApplicationController
     @Elevation_samples = google_directions_elevation(@stage)
     @pitstop = @stage.end_point
     @hotels = find_places(@pitstop.latitude, @pitstop.longitude)
-
-
- #    if @pitstop.update(pitstop_params)
- #    #find_places(@pitstop.latitude, @pitstop.longitude)
- #    redirect_to trip_stage_path(@trip, @stage)
- #  else
- #   render :new
- # end
 end
 
 def new
@@ -36,7 +28,7 @@ def destroy
 end
 
 private
-
+# Below code left in for future use.
 # def pitstop_params
 #   params.require(:pitstop).permit(:name, :address, :stage_id, :latitude, :longitude, :price, :rating, :start_stage_id)
 # end
@@ -58,7 +50,7 @@ def google_directions_elevation(stage)
 
   locations = [[stage.start_point.latitude, stage.start_point.longitude], [stage.end_point.latitude, stage.end_point.longitude]]
   results = gmaps.elevation_along_path(locations, 200)
-    #raise
+
 
   end
 end

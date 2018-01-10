@@ -1,4 +1,4 @@
-<h1>index</h1>  
+<h1>index</h1>
 
 
 
@@ -20,8 +20,7 @@
   var directionsService = new google.maps.DirectionsService();
 
   function calcRoute() {
-    /* var origin      = new google.maps.LatLng(55.676097, 12.568337); */
-    /* var destination = new google.maps.LatLng(55.663895, 12.542540); */
+
 
     var waypts = [];
     <% @trip.stages.each do |stage|  %>
@@ -35,7 +34,7 @@
     console.log(waypts)
 
     var request = {
-      origin:             '<%= start_address %>',  
+      origin:             '<%= start_address %>',
       /* document.getElementById('start').value, */
       destination:        '<%= destination_address %>',
       waypoints:          waypts,
@@ -46,22 +45,19 @@
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        
+
         const leg_array = response.routes[0].legs
 
         leg_array.forEach((leg) => {
-         console.log(leg.distance.value / 1000);  
+         console.log(leg.distance.value / 1000);
         });
 
          leg_array.forEach((leg) => {
-         console.log(leg.duration.text );  
+         console.log(leg.duration.text );
         });
 
          const steps = response.routes[0].legs[0].steps[0].distance
          console.log(steps);
-
-         /* response.routes[0].legs[1].distance.value; */
-        /* alert( response.routes[0].legs[1].duration.text ); */
       }
     });
   }
