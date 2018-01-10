@@ -8,7 +8,7 @@ class TripsController < ApplicationController
     @stages = @trip.stages
     @trip_member = TripMember.new()
 
-   # @average_stage_distance_km = @distance_in_km / (end_date.to_date - start_date.to_date).to_i
+
  end
 
  def new
@@ -23,14 +23,7 @@ class TripsController < ApplicationController
   trip_name = params[:name]
 
   step_array = google_directions_locations(start_address, end_address, start_date, end_date)
- #   test_array = []
- #
- #   @doc.root.xpath("//step//distance//value").children.each do |child|
- #     test_array << child.text.to_i
- #   end
- # raise
 
- #  all_steps_without_total = all_steps.slice!(-1)
 
     ####### 1 INSTANTIATING A NEW TRIP
     @trip = Trip.new
