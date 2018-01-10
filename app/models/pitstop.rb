@@ -25,7 +25,7 @@ class Pitstop < ApplicationRecord
     first_pitstop.start_stage = first_stage
     first_pitstop.address = start_address
 
-    ##### pitstop lat/long
+
 
     first_pitstop.save
   end
@@ -36,18 +36,6 @@ class Pitstop < ApplicationRecord
     assign_counter = 1
     assign_stage = trip.find_stage(assign_counter)
 
-
-    # (pitstops - 1).times do |i|
-    #   pitstop = Pitstop.new
-    #   pitstop.end_stage = assign_stage
-    #   assign_counter += 1
-    #   assign_stage = trip.find_stage(assign_counter)
-    #   pitstop.start_stage = assign_stage
-    #   pitstop.latitude = step_array[i][0]
-    #   pitstop.longitude = step_array[i][1]
-    #   pitstop.save
-
-    # end
     step_array.each do |step|
       pitstop = Pitstop.new
       pitstop.end_stage = assign_stage
