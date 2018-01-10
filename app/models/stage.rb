@@ -10,7 +10,7 @@ default_scope { order("stage_no ASC") }
 # start_point.address changed to lat/lng to allow unnamed roads
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
     routes = gmaps.directions((origin=start_point.latitude,start_point.longitude), (destination=end_point.latitude,end_point.longitude),
-    mode: "bicycling",
+   # mode: "bicycling",
     alternatives: false,
     avoid: "highways",
     avoid: "ferries"

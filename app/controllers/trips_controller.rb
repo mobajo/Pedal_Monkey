@@ -90,7 +90,7 @@ class TripsController < ApplicationController
     routes = gmaps.directions(
       start_address,
       end_address,
-      mode: "bicycling",
+     # mode: "bicycling",
       alternatives: false,
       avoid: "highways",
       avoid: "ferries"
@@ -133,7 +133,7 @@ class TripsController < ApplicationController
   def google_directions_total_distance(start_address, end_address)
     gmaps = GoogleMapsService::Client.new(key: ENV['GOOGLE_API_BROWSER_KEY'])
     routes = gmaps.directions(start_address, end_address,
-      mode: 'bicycling',
+     # mode: 'bicycling',
       alternatives: false,
       avoid: 'highways',
       avoid: 'ferries'
