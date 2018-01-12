@@ -30,7 +30,16 @@
       </div>
       <div class="col-xs-12 col-sm-3 text-center">
         <h4>Team members</h4>
-        <h2><%= @trip.trip_members.count %></h2>
+        <% if @trip.trip_members == nil %>
+          <p>
+            <em>
+              No team members. Sign up to save your trips.
+            </em>
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info", style: "margin-left: 20px;" %>
+          </p>
+        <% else %>
+          <h2><%= @trip.trip_members.count %></h2>
+        <% end %>
       </div>
     </div>
     <div>
@@ -117,13 +126,26 @@
     </div>
     <div class="col-xs-12 col-sm-4 text-center">
       <h4>Created by:</h4>
-      <%= cl_image_tag @trip.trip_members.first.user.photo.path, class: "avatar-large avatar-bordered", style: "margin-bottom: 40px;" %>
+
+      <% if @trip.trip_members.first == nil %>
+          <p style="margin-bottom: 30px;">
+            No users are associated with the trip
+          </p>
+      <% else %>
+        <%= cl_image_tag @trip.trip_members.first.user.photo.path, class: "avatar-large avatar-bordered", style: "margin-bottom: 40px;" %>
+      <% end %>
     </div>
     <div class="col-xs-12 col-sm-3">
       <h4>Invite:</h4>
-      <%= form_for([@trip, @trip_member]) do |f| %>
-      <%= f.email_field :user, placeholder: "Email", class: "form-control" %>
-      <%= f.submit("Add team member", class: "btn btn-danger btn-pm") %>
+      <% if @trip.trip_members.first == nil %>
+          <p style="margin-bottom: 30px;">
+            <%= link_to "Sign up", new_user_registration_path %>  to save your trips and invite other users a long.
+          </p>
+      <% else %>
+        <%= form_for([@trip, @trip_member]) do |f| %>
+        <%= f.email_field :user, placeholder: "Email", class: "form-control" %>
+        <%= f.submit("Add team member", class: "btn btn-danger btn-pm", style: "margin-bottom: 30px;") %>
+        <% end %>
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-4 text-center">

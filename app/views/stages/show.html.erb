@@ -8,8 +8,18 @@
 
 <div class="container">
   <div class="col-xs-12">
-    <h1><%= @trip.title %>: Stage no. <%= @stage.stage_no %></h1>
-    <p style="margin-bottom: -10px; padding-bottom: 0px;"><%= link_to "Home", root_path %> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <%= link_to @trip.title, trip_path(@trip) %> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Stage no <%= @stage.stage_no %> </p>
+    <h1>
+      <% if @trip.title == nil %>
+      Unnamed trip
+      <% end %>
+      <%= @trip.title %>: Stage no. <%= @stage.stage_no %>       
+    </h1>
+    <p style="margin-bottom: -10px; padding-bottom: 0px;"><%= link_to "Home", root_path %> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <% if @trip.title == nil %>
+        <%= link_to "Unnamed trip", trip_path(@trip) %>
+      <% else %>
+        <%= link_to @trip.title, trip_path(@trip) %>
+      <% end %>
+       <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Stage no <%= @stage.stage_no %> </p>
   </div>
   <div class="col-xs-12 col-sm-5">
 
