@@ -12,7 +12,7 @@
       <% if @trip.title == nil %>
       Unnamed trip
       <% end %>
-      <%= @trip.title %>: Stage no. <%= @stage.stage_no %>       
+      <%= @trip.title %>: Stage no. <%= @stage.stage_no %>
     </h1>
     <p style="margin-bottom: -10px; padding-bottom: 0px;"><%= link_to "Home", root_path %> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <% if @trip.title == nil %>
         <%= link_to "Unnamed trip", trip_path(@trip) %>
@@ -123,12 +123,16 @@
   var directionsService = new google.maps.DirectionsService();
   directionsDisplay.setPanel(document.getElementById('right-panel'));
 
-
-  function calcRoute() {
-
+function calcRoute() {
+  var  startLat = parseFloat("<%= raw @stage.start_point.latitude %>")
+  var startLng = parseFloat("<%= raw @stage.start_point.longitude %>")
+  var endLat = parseFloat("<%= raw @stage.end_point.latitude %>");
+  var endLng = parseFloat("<%= raw @stage.end_point.longitude %>");
+  var startCoodinates = { lat: startLat, lng:startLng};
+  var endCoodinates = { lat: endLat, lng: endLng};
     var request = {
-      origin:             '<%= start_address %>',
-      destination:        '<%= destination_address %>',
+      origin:             startCoodinates,
+      destination:        endCoodinates,
       travelMode:         google.maps.TravelMode.WALKING,
       avoidHighways: true
     };
